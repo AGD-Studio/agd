@@ -1,92 +1,193 @@
-/* AGD Company — Spanish translations.
+/* AGD Studio — Spanish translations.
    Keys are the English text exactly as it appears on the page (whitespace collapsed).
    main.js swaps text nodes and a few attributes using this table. */
 window.GD_ES = (function () {
   var es = {
     /* Document */
-    'AGD Company Studio': 'AGD Company Estudio',
-    'AGD Company is a digital studio. We design websites, build brands and help businesses, entrepreneurs and real estate professionals become visible and grow online.':
-      'AGD Company es un estudio digital. Diseñamos webs, creamos marcas y ayudamos a empresas, emprendedores y profesionales inmobiliarios a ser visibles y crecer en internet.',
+    'AGD Studio | Your ideas. Our digital vision.': 'AGD Studio | Tus ideas. Nuestra visión digital.',
+    'AGD Studio helps real estate agencies attract buyers and property owners through digital advertising, creative content, audiovisual production and lead generation strategies.':
+      'AGD Studio ayuda a inmobiliarias a atraer compradores y propietarios mediante publicidad digital, contenido creativo, producción audiovisual y estrategias de captación.',
 
     /* Navigation */
     'Skip to content': 'Saltar al contenido',
-    'AGD Company, back to top': 'AGD Company, volver arriba',
+    'AGD Studio, back to top': 'AGD Studio, volver arriba',
     'Main': 'Principal',
     'Services': 'Servicios',
     'Websites': 'Webs',
     'Real estate': 'Inmobiliaria',
     'Work': 'Proyectos',
     'Studio': 'Estudio',
-    'Start a project': 'Empezar un proyecto',
+    'Method': 'Método',
+    'Plans': 'Planes',
+    "Let's talk": 'Hablemos',
     'Menu': 'Menú',
     'Close': 'Cerrar',
 
     /* Hero */
     'Introduction': 'Introducción',
-    'We build': 'Creamos',
-    'digital': 'presencia',
-    'presence.': 'digital.',
-    'We design websites, shape brands and put businesses in front of new opportunities. One digital partner, from first idea to lasting presence.':
-      'Diseñamos webs, construimos marcas y ponemos a los negocios frente a nuevas oportunidades. Un solo socio digital, desde la primera idea hasta una presencia duradera.',
-    'For brands, businesses, entrepreneurs and real estate professionals.': 'Para marcas, empresas, emprendedores y profesionales inmobiliarios.',
     'Scroll to open the film': 'Desliza para abrir el vídeo',
     'Your ideas.': 'Tus ideas.',
     'Our digital vision.': 'Nuestra visión digital.',
-    'Websites, branding, visibility, digitalization, real estate.': 'Webs, branding, visibilidad, digitalización, inmobiliaria.',
+    'We turn your goals into digital strategies that create opportunities.': 'Convertimos tus objetivos en estrategias digitales que generan oportunidades.',
+    'Digital advertising, content and lead generation for real estate agencies.': 'Publicidad digital, contenido y captación para inmobiliarias.',
+    "It's not just about": 'No se trata solo',
+    'posting on social.': 'de publicar en redes.',
+    'We understand what you want to achieve and build the digital strategy with you to make it happen.':
+      'Entendemos lo que quieres conseguir y construimos contigo la estrategia digital para hacerlo posible.',
     'Keep scrolling': 'Sigue bajando',
 
     /* Services */
-    'One partner for the whole digital picture.': 'Un solo socio para todo lo digital.',
-    'Most businesses juggle a web designer, a marketer and someone who "knows about Google". We bring it together, so your website, brand and visibility pull in the same direction.':
-      'La mayoría de negocios hacen malabares con un diseñador web, alguien de marketing y alguien que "sabe de Google". Nosotros lo unimos todo, para que tu web, tu marca y tu visibilidad tiren en la misma dirección.',
-    'Show services for': 'Mostrar servicios para',
-    'Show what we do for': 'Mira lo que hacemos para',
-    'Everyone': 'Todos',
-    'Brands': 'Marcas',
-    'Businesses': 'Empresas',
-    'Entrepreneurs': 'Emprendedores',
-    '12 services': '12 servicios',
-    '3 services': '3 servicios',
+    'From the ad to the opportunity.': 'Del anuncio a la oportunidad.',
+    'We help real estate agencies attract buyers and property owners through digital advertising, content and lead generation strategies designed to create real business opportunities.':
+      'Ayudamos a inmobiliarias a atraer compradores y propietarios mediante publicidad digital, contenido y estrategias de captación diseñadas para generar oportunidades comerciales reales.',
+    'Our services': 'Nuestros servicios',
+    'Advertising and lead generation': 'Publicidad y captación',
+    'Creatives': 'Creatividades',
+    'Audiovisual production': 'Producción audiovisual',
+    'Property technical sheet': 'Ficha técnica de la propiedad',
     'Build': 'Crear',
-    'Brand': 'Marca',
     'Grow': 'Crecer',
-    'Property': 'Inmuebles',
-    'Custom websites': 'Webs a medida',
-    'Designed and coded around your business, not a template. Fast, responsive and easy to update.':
-      'Diseñadas y programadas en torno a tu negocio, no a una plantilla. Rápidas, adaptables y fáciles de actualizar.',
-    'Landing pages and platforms': 'Landing pages y plataformas',
-    'Focused pages for launches and campaigns, and larger platforms when you need accounts, bookings or catalogues.':
-      'Páginas enfocadas para lanzamientos y campañas, y plataformas más grandes cuando necesitas cuentas, reservas o catálogos.',
-    'Custom digital solutions': 'Soluciones digitales a medida',
-    'Tools shaped to how you work: quote calculators, client areas, internal dashboards.':
-      'Herramientas adaptadas a cómo trabajas: calculadoras de presupuestos, áreas de cliente, paneles internos.',
-    'Branding and visual identity': 'Branding e identidad visual',
-    'Logos, type, colour and the rules that keep them consistent everywhere you show up.':
-      'Logotipos, tipografía, color y las reglas que los mantienen coherentes allí donde aparezcas.',
-    'Visibility and positioning': 'Visibilidad y posicionamiento',
-    'Search, profiles and listings set up so the people looking for you actually find you.':
-      'Buscadores, perfiles y fichas configurados para que quien te busca de verdad te encuentre.',
-    'Marketing and communication': 'Marketing y comunicación',
-    'Campaigns, social content and newsletters that say one clear thing well.':
-      'Campañas, contenido para redes y newsletters que dicen una cosa clara, y la dicen bien.',
-    'Promotion through our network': 'Promoción a través de nuestra red',
-    'Feature your brand on our platform and in front of the partners and audiences we already work with.':
-      'Muestra tu marca en nuestra plataforma y ante los socios y públicos con los que ya trabajamos.',
-    'Business digitalization': 'Digitalización de negocios',
-    'Move bookings, payments, forms and paperwork online so your team spends its time on clients.':
-      'Lleva reservas, pagos, formularios y papeleo a internet para que tu equipo dedique su tiempo a los clientes.',
-    'Ongoing support': 'Soporte continuo',
-    'A team you can call after launch: updates, improvements and honest advice on what to do next.':
-      'Un equipo al que llamar después del lanzamiento: actualizaciones, mejoras y consejos honestos sobre el siguiente paso.',
-    'Real estate digital support': 'Soporte digital inmobiliario',
-    'Websites, listings and campaigns for agents, agencies, property owners and developers.':
-      'Webs, anuncios y campañas para agentes, agencias, propietarios y promotoras.',
-    'Property presentation': 'Presentación de inmuebles',
-    'Photo direction, floor plans and dedicated pages that make a property easy to say yes to.':
-      'Dirección fotográfica, planos y páginas dedicadas que hacen fácil decir sí a un inmueble.',
-    'Real estate websites and portfolios': 'Webs y portfolios inmobiliarios',
-    'Searchable listings with maps and filters, or a refined portfolio for a single development.':
-      'Anuncios con buscador, mapas y filtros, o un portfolio cuidado para una sola promoción.',
+
+    'Advertising and digital lead generation': 'Publicidad y captación digital',
+    'The strategic foundation of the whole lead generation process.': 'La base estratégica de todo el proceso de captación.',
+    'We create and manage digital campaigns designed to generate contacts and business opportunities.':
+      'Creamos y gestionamos campañas digitales orientadas a generar contactos y oportunidades comerciales.',
+    'Areas of work': 'Áreas de trabajo',
+    'Targeting': 'Segmentación',
+    'Instagram and Facebook': 'Instagram y Facebook',
+    'Lead generation': 'Captación de clientes potenciales',
+    'Client relationship management and follow-up': 'Gestión de la relación con el cliente y seguimiento',
+    'Analysis and optimization': 'Análisis y optimización',
+
+    'The content that makes your message visible.': 'El contenido que hace visible tu mensaje.',
+    'A creative is the content a person sees when they come across an ad.': 'Una creatividad es el contenido que una persona ve cuando recibe un anuncio.',
+    'What people see': 'Lo que se ve',
+    'What people read': 'Lo que se lee',
+    'Photography': 'Fotografía',
+    'Video': 'Vídeo',
+    'Carousel': 'Carrusel',
+    'Graphic design': 'Diseño gráfico',
+    'Headline': 'Titular',
+    'Ad copy': 'Texto publicitario',
+    'Call to action': 'Llamada a la acción',
+    'We turn the information about your business and your properties into content designed to catch attention, spark interest and prompt action.':
+      'Convertimos la información de tu negocio y tus propiedades en contenidos pensados para captar atención, generar interés y provocar una acción.',
+
+    'Your property deserves a good presentation too.': 'Tu propiedad también necesita una buena presentación.',
+    'We come to your properties to produce audiovisual material you can use in campaigns, on social media and on property portals.':
+      'Nos desplazamos a tus propiedades para generar material audiovisual que puedas utilizar en campañas, redes sociales y portales.',
+    'A single session can give us material for several pieces of content and ads.':
+      'Una única sesión puede proporcionarnos material para crear diferentes contenidos y anuncios.',
+    'Basic session': 'Sesión básica',
+    '€60': '60 €',
+    'Local travel within Gran Canaria': 'Desplazamiento local en Gran Canaria',
+    'Up to 60 minutes': 'Hasta 60 minutos',
+    'Photographs': 'Fotografías',
+    'Vertical videos': 'Vídeos verticales',
+    'Filming of the main rooms': 'Grabación de las principales estancias',
+    'Material organized for campaigns and social media': 'Material organizado para campañas y redes',
+    'Request a session': 'Solicitar una sesión',
+    'Travel and conditions': 'Desplazamientos y condiciones',
+    'The €60 price covers local travel within Gran Canaria.': 'El precio de 60 € corresponde a desplazamientos locales en Gran Canaria.',
+    'When a shoot requires special travel, for example to another island or trips that involve additional transport, the session will be quoted in advance based on distance, time and travel costs.':
+      'Cuando la producción requiera desplazamientos especiales —por ejemplo, a otra isla o desplazamientos que impliquen transporte adicional—, el precio de la sesión se presupuestará previamente en función de la distancia, el tiempo y los costes de desplazamiento.',
+    'We will always tell you about any additional cost before the session.': 'Siempre te informaremos del coste adicional antes de realizar la sesión.',
+
+    'Every property needs a clear, complete and professional presentation.': 'Todo activo necesita una presentación clara, completa y profesional.',
+    'We create a digital technical sheet for the property, bringing together the essential information about the home in an organized way to make it easier to present and sell.':
+      'Creamos una ficha técnica digital de la propiedad, reuniendo de forma ordenada la información esencial del inmueble para facilitar su presentación y comercialización.',
+    'The technical sheet can be used to': 'La ficha técnica puede utilizarse para',
+    'Present the home to potential buyers': 'Presentar la vivienda a potenciales compradores',
+    'Provide information during viewings': 'Facilitar información durante las visitas',
+    'Share it by WhatsApp or email': 'Compartir por WhatsApp o correo electrónico',
+    'Complement your listings': 'Complementar los anuncios',
+    'Improve the commercial presentation of the property': 'Mejorar la presentación comercial del inmueble',
+    "A well-presented home conveys more information, builds more trust and makes the buyer's decision easier.":
+      'Una vivienda bien presentada transmite más información, genera más confianza y facilita la decisión del comprador.',
+    'Technical sheet': 'Ficha técnica',
+    '€45': '45 €',
+    'per home': '/ vivienda',
+    'One-off price per property, not a subscription': 'Precio único por vivienda, no es una suscripción',
+    'Main property information': 'Información principal del inmueble',
+    'Features and layout': 'Características y distribución',
+    'Floor areas and top-down view': 'Superficies y perspectiva cenital',
+    'Amenities': 'Comodidades',
+    'Equipment and features': 'Equipamiento y prestaciones',
+    'Location and surroundings': 'Ubicación y entorno',
+    'Relevant information for the buyer': 'Información relevante para el comprador',
+    'Clear, professional visual layout': 'Presentación visual ordenada y profesional',
+    'Request a technical sheet': 'Solicitar ficha técnica',
+    'Illustrative example of a technical sheet, not a real property.': 'Ejemplo ilustrativo de ficha técnica, no corresponde a un inmueble real.',
+
+    /* Two paths */
+    'Two paths. One goal.': 'Dos caminos. Un mismo objetivo.',
+    'Advertising and personal relationships work differently, but both can lead to the same place.':
+      'La publicidad y las relaciones personales funcionan de forma distinta, pero las dos pueden llevar al mismo sitio.',
+    'Path 1': 'Camino 1',
+    'Path 2': 'Camino 2',
+    'Digital acquisition': 'Captación digital',
+    'Relationship-based acquisition': 'Captación por relaciones',
+    'Digital acquisition steps': 'Etapas de la captación digital',
+    'Relationship-based acquisition steps': 'Etapas de la captación por relaciones',
+    'Advertising': 'Publicidad',
+    'Potential client': 'Cliente potencial',
+    'Client relationship management': 'Gestión de la relación con el cliente',
+    'Follow-up': 'Seguimiento',
+    'Clients': 'Clientes',
+    'Relationships': 'Relaciones',
+    'Referral': 'Recomendación',
+    'Shared outcome': 'Resultado compartido',
+    'Business opportunities': 'Oportunidades comerciales',
+
+    /* Plans */
+    'Monthly plans': 'Planes mensuales',
+    'Two ways to work together every month. Ad spend is not included in either plan and is always paid separately.':
+      'Dos formas de trabajar juntos cada mes. La inversión publicitaria no está incluida en ningún plan y se paga siempre aparte.',
+    'Basic Plan': 'Plan Básico',
+    'Complete Plan': 'Plan Completo',
+    'For agencies that want to start making their digital lead generation more professional.':
+      'Para inmobiliarias que quieren empezar a profesionalizar su captación digital.',
+    'For agencies that want to turn their digital presence into a more complete lead generation system.':
+      'Para inmobiliarias que quieren convertir su presencia digital en un sistema de captación más completo.',
+    '€200': '200 €',
+    '€400': '400 €',
+    '/month': '/mes',
+    'Ad spend not included': 'Inversión publicitaria no incluida',
+    'Initial': 'Inicial',
+    'Personalized': 'Personalizada',
+    'Up to 4 a month': 'Hasta 4 al mes',
+    'Up to 8 a month': 'Hasta 8 al mes',
+    'Content production': 'Producción de contenido',
+    'Not included': 'No incluida',
+    '1 session a month': '1 sesión al mes',
+    'Includes': 'Incluye',
+    'Everything in the Basic Plan, plus:': 'Todo lo del Plan Básico, más:',
+    'Initial strategy': 'Estrategia inicial',
+    'Ad campaign management': 'Gestión de campañas publicitarias',
+    'Audience targeting': 'Segmentación de públicos',
+    'Campaign creation and management': 'Creación y gestión de campañas',
+    'Up to 4 creatives a month': 'Hasta 4 creatividades mensuales',
+    'Campaign optimization': 'Optimización de campañas',
+    'Lead tracking': 'Seguimiento de leads',
+    'Basic CRM': 'CRM básico',
+    'Regular results report': 'Informe periódico de resultados',
+    'Advice on recommended ad spend': 'Asesoría sobre inversión publicitaria recomendada',
+    'Personalized lead generation strategy': 'Estrategia de captación personalizada',
+    'End-to-end campaign management': 'Gestión integral de campañas',
+    'Up to 8 creatives a month': 'Hasta 8 creatividades mensuales',
+    'Management of different channels according to strategy': 'Gestión de diferentes canales según estrategia',
+    'CRM and lead organization': 'CRM y organización de leads',
+    'Continuous analysis and optimization': 'Análisis y optimización continua',
+    'Follow-up of the lead generation process': 'Seguimiento del proceso de captación',
+    '1 content production session a month': '1 sesión mensual de producción de contenido',
+    'Request the Basic Plan': 'Solicitar Plan Básico',
+    'Request the Complete Plan': 'Solicitar Plan Completo',
+    'About ad spend': 'Sobre la inversión publicitaria',
+    'Ad spend is a necessary investment to extend the reach of the product. The advertising budget is paid separately and belongs entirely to the client, at their discretion.':
+      'La inversión publicitaria es una partida necesaria para mejorar el alcance del producto. El presupuesto destinado a publicidad se paga aparte y pertenece íntegramente al cliente y su criterio.',
+    'Also available separately': 'También por separado',
+    'Basic audiovisual session, €60': 'Sesión audiovisual básica, 60 €',
+    'Property technical sheet, €45 per home': 'Ficha técnica de la propiedad, 45 € / vivienda',
 
     /* Web design */
     'Websites built to be used, not just looked at.': 'Webs hechas para usarse, no solo para mirarse.',
@@ -313,8 +414,13 @@ window.GD_ES = (function () {
     'Workshop open Monday to Saturday': 'Taller abierto de lunes a sábado',
 
     /* About */
-    'AGD is a multidisciplinary digital studio. We combine creativity, technology, branding and strategy to turn ideas into brands people notice, and businesses that grow online.':
-      'AGD es un estudio digital multidisciplinar. Combinamos creatividad, tecnología, branding y estrategia para convertir ideas en marcas que se hacen notar y en negocios que crecen en internet.',
+    'Your ideas. Our digital vision.': 'Tus ideas. Nuestra visión digital.',
+    'You know your business. We know the tools and possibilities of the digital world.':
+      'Tú conoces tu negocio. Nosotros conocemos las herramientas y posibilidades del entorno digital.',
+    "We don't want to tell you what your business should be. We want to understand it, spot its possibilities and help you take them into the digital world.":
+      'No queremos decirte cómo debe ser tu negocio. Queremos entenderlo, detectar sus posibilidades y ayudarte a llevarlas al mundo digital.',
+    'Your idea is the starting point and the destination.': 'Tu idea es el punto de partida y la meta.',
+    'Our digital vision is the journey.': 'Nuestra visión digital, el recorrido.',
     'Creativity': 'Creatividad',
     'Ideas with a point of view, shaped for your audience rather than borrowed from a template.':
       'Ideas con un punto de vista propio, pensadas para tu público en lugar de sacadas de una plantilla.',
@@ -333,33 +439,34 @@ window.GD_ES = (function () {
     'Launch, measure and keep improving with ongoing support.': 'Lanzar, medir y seguir mejorando con soporte continuo.',
 
     /* Contact */
-    'Have an idea?': '¿Tienes una idea?',
-    "Let's build it.": 'Hagámosla realidad.',
+    'Shall we talk?': '¿Hablamos?',
+    "Tell us what you want to achieve and we'll work out with you how we can help.":
+      'Cuéntanos qué quieres conseguir y estudiaremos contigo cómo podemos ayudarte.',
     'Name': 'Nombre',
     'Your name': 'Tu nombre',
     'you@company.com': 'tu@empresa.com',
     'Company': 'Empresa',
     '(optional)': '(opcional)',
     'Company or project name': 'Nombre de la empresa o proyecto',
-    'Type of project': 'Tipo de proyecto',
+    'What are you interested in?': '¿Qué te interesa?',
+    'Audiovisual session': 'Sesión audiovisual',
     'Website': 'Web',
     'Brand visibility': 'Visibilidad de marca',
     'Something else': 'Otra cosa',
     'Message': 'Mensaje',
-    'What are you building, and when would you like to launch?': '¿Qué estás creando y cuándo te gustaría lanzarlo?',
-    'Send project brief': 'Enviar proyecto',
+    'Tell us what you want to achieve.': 'Cuéntanos qué quieres conseguir.',
+    'Request a meeting': 'Solicitar una reunión',
     'We reply within two working days.': 'Respondemos en un máximo de dos días laborables.',
     'Direct contact': 'Contacto directo',
     'Phone and WhatsApp': 'Teléfono y WhatsApp',
     'Follow the studio': 'Sigue al estudio',
-    '© 2026 AGD Company. Digital studio.': '© 2026 AGD Company. Estudio digital.',
+    '© 2026 AGD Studio. Digital studio.': '© 2026 AGD Studio. Estudio digital.',
+    'Digital marketing · Advertising · Creativity · Lead generation · Content · Data': 'Marketing digital · Publicidad · Creatividad · Captación · Contenido · Datos',
     'Privacy': 'Privacidad',
     'Legal notice': 'Aviso legal',
     'Back to top': 'Volver arriba',
 
     /* Strings built in main.js */
-    ' services for ': ' servicios para ',
-    ' of 3': ' de 3',
     'Add your name so we know who to reply to.': 'Escribe tu nombre para saber a quién responder.',
     'Enter an email address like you@company.com.': 'Introduce un email como tu@empresa.com.',
     'Tell us a little about the project.': 'Cuéntanos un poco sobre el proyecto.',

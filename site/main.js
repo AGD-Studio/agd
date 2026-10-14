@@ -1,4 +1,4 @@
-/* AGD Company — site behaviour */
+/* AGD Studio — site behaviour */
 (function () {
   'use strict';
 
@@ -19,7 +19,6 @@
   var lang = root.getAttribute('data-lang') === 'es' ? 'es' : 'en';
   var I18N_ATTRS = ['aria-label', 'placeholder', 'data-cursor'];
   var EN_TITLE = document.title, metaDesc = $('meta[name="description"]'), EN_DESC = metaDesc ? metaDesc.content : '';
-  var refreshServices = null;
   function t(s) { return lang === 'es' && ES[s] ? ES[s] : s; }
 
   // Swap every translatable text node and attribute under `scope`, keeping the English original on the node
@@ -52,7 +51,6 @@
     if (metaDesc) metaDesc.content = t(EN_DESC);
     $('.lang').setAttribute('aria-label', lang === 'es' ? 'View in English' : 'Ver en español');
     $('.menu-label').textContent = t(document.body.classList.contains('menu-open') ? 'Close' : 'Menu');
-    if (refreshServices) refreshServices();
     aboutStatement();
   }
 
@@ -349,30 +347,11 @@
   })();
 
   /* ------------------------------------------------------------------
-     Services filter
+     Services: illustrative property sheet reuses the listing artwork
      ------------------------------------------------------------------ */
-  refreshServices = (function services() {
-    var chips = $$('[data-filter]'), cards = $$('.service'), count = $('.filters-count');
-    var active = chips[0];
-    function update() {
-      var chip = active, f = chip.dataset.filter, n = 0;
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
-      cards.forEach(function (card) {
-        var match = f === 'all' || card.dataset.for.split(' ').indexOf(f) > -1;
-        if (match) n++;
-        card.classList.toggle('is-dim', !match);
-        card.classList.toggle('is-match', match && f !== 'all');
-      });
-      $$('.discipline').forEach(function (g) {
-        var m = $$('.service:not(.is-dim)', g).length;
-        $('h3 span', g).textContent = f === 'all' ? t('3 services') : m + t(' of 3');
-      });
-      count.textContent = f === 'all' ? t('12 services') : n + t(' services for ') + chip.textContent.toLowerCase();
-    }
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () { active = chip; update(); });
-    });
-    return update;
+  (function sheet() {
+    var el = $('#sheet-art');
+    if (el) el.innerHTML = propArt('villa');
   })();
 
   /* ------------------------------------------------------------------
@@ -709,7 +688,8 @@
 
     // Lists of cards and rows arrive in a soft cascade
     var items = $$([
-      '.filters', '.discipline h3', '.service', '.pick', '.bench-tools', '.web-facts > div',
+      '.offer-index', '.offer-head', '.offer-body', '.price-card', '.sheet', '.path', '.paths-goal',
+      '.plan', '.plans-note', '.plans-extra', '.philosophy > *', '.contact-lead', '.pick', '.bench-tools', '.web-facts > div',
       '.way', '.vis-cta', '.audiences > div', '.outcome', '.re-who > div',
       '.re-services .h3', '.re-services li', '.about-mark', '.pillars > div', '.process h3', '.step',
       '.form .field', '.form fieldset', '.form-end', '.direct > div', '.work-meta', '.footer'
