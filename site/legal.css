@@ -1,0 +1,38 @@
+/* ==========================================================================
+   AGD Studio — legal pages (aviso legal, privacidad)
+   Reuses the tokens and type roles from styles.css; adds only reading layout.
+   ========================================================================== */
+.legal-nav { border-bottom: 1px solid var(--line); }
+.legal-nav .nav-bar { height: 84px; }
+.legal-nav .brand { color: var(--fg); }
+.legal-back { font-size: .95rem; color: var(--muted); }
+.legal-back:hover { color: var(--fg); }
+
+.legal { padding-block: clamp(64px, 10vw, 140px); }
+.legal .h2 { max-width: 14ch; }
+.legal-meta { margin-top: 24px; }
+.legal-body { margin-top: clamp(48px, 7vw, 96px); max-width: 72ch; }
+.legal-body h2 { font-size: var(--t-h3); font-stretch: 110%; font-weight: 450; letter-spacing: -.02em; line-height: 1.1; margin: 56px 0 18px; }
+.legal-body h2:first-child { margin-top: 0; }
+.legal-body h3 { font-size: 1.05rem; font-weight: 500; margin: 28px 0 10px; }
+.legal-body p, .legal-body li { color: var(--muted); }
+.legal-body p + p { margin-top: 12px; }
+.legal-body ul { list-style: disc; padding-left: 1.2em; margin: 12px 0; }
+.legal-body li + li { margin-top: 6px; }
+.legal-body a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.legal-body strong { color: var(--fg); font-weight: 500; }
+.legal-body dl { display: grid; gap: 10px 24px; margin: 16px 0; }
+@media (min-width: 700px) { .legal-body dl { grid-template-columns: max-content 1fr; } }
+.legal-body dt { color: var(--fg); font-weight: 500; }
+.legal-body dd { color: var(--muted); }
+
+/* Data the owner still has to supply. Visible on purpose: remove once filled in. */
+.todo { background: var(--sun); color: var(--ink); padding: 0 .3em; border-radius: 3px; }
+
+.legal-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+.legal-table th, .legal-table td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); }
+.legal-table th { color: var(--fg); font-weight: 500; }
+.legal-table td { color: var(--muted); }
+.legal-scroll { overflow-x: auto; }
+
+.legal .footer { margin-top: clamp(64px, 8vw, 120px); }

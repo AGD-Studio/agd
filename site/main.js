@@ -692,7 +692,7 @@
       '.plan', '.plans-note', '.plans-extra', '.philosophy > *', '.contact-lead', '.pick', '.bench-tools', '.web-facts > div',
       '.way', '.vis-cta', '.audiences > div', '.outcome', '.re-who > div',
       '.re-services .h3', '.re-services li', '.about-mark', '.pillars > div', '.process h3', '.step',
-      '.form .field', '.form fieldset', '.form-end', '.direct > div', '.work-meta', '.footer'
+      '.form .field', '.form fieldset', '.form-end', '.form-legal', '.direct > div', '.work-meta', '.footer'
     ].join(','));
     gsap.set(items, { y: 44, opacity: 0 });
     ScrollTrigger.batch(items, {

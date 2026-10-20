@@ -7,9 +7,8 @@
   <meta name="description" content="AGD Studio helps real estate agencies attract buyers and property owners through digital advertising, creative content, audiovisual production and lead generation strategies.">
   <meta name="theme-color" content="#F2F4F3">
   <link rel="icon" href="assets/mark.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
   <script>
     // Decide early: loader once per session, static hero when motion is reduced.
@@ -611,18 +610,18 @@
             <div class="form-row">
               <div class="field">
                 <label for="f-name">Name</label>
-                <input id="f-name" name="name" autocomplete="name" placeholder="Your name" required>
+                <input id="f-name" name="name" autocomplete="name" placeholder="Your name" maxlength="100" required>
                 <span class="field-error" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="f-email">Email</label>
-                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required>
                 <span class="field-error" aria-live="polite"></span>
               </div>
             </div>
             <div class="field">
               <label for="f-company">Company <span>(optional)</span></label>
-              <input id="f-company" name="company" autocomplete="organization" placeholder="Company or project name">
+              <input id="f-company" name="company" autocomplete="organization" placeholder="Company or project name" maxlength="120">
             </div>
             <fieldset>
               <legend>What are you interested in?</legend>
@@ -640,13 +639,14 @@
             </fieldset>
             <div class="field">
               <label for="f-msg">Message</label>
-              <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what you want to achieve." required></textarea>
+              <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what you want to achieve." maxlength="1500" required></textarea>
               <span class="field-error" aria-live="polite"></span>
             </div>
             <div class="form-end">
               <button class="btn" type="submit" style="--b-bg: var(--fg); --b-fg: var(--bg)"><span class="btn-dot"></span>Request a meeting</button>
               <p class="form-status" id="form-status" aria-live="polite">We reply within two working days.</p>
             </div>
+            <p class="small form-legal"><span>AGD Studio is responsible for the details you send. We use them only to answer your enquiry and, if you ask for one, to prepare a quote (legal basis: steps taken at your request before a contract). They are not shared with third parties unless the law requires it. You can access, correct or delete them, among other rights, by writing to hello@gdcompany.com.</span> <a href="privacidad.html">Privacy policy</a></p>
           </form>
 
           <aside class="direct" aria-label="Direct contact">
@@ -670,15 +670,15 @@
           </div>
           <p class="footer-keys">Digital marketing · Advertising · Creativity · Lead generation · Content · Data</p>
           <span>© 2026 AGD Studio. Digital studio.</span>
-          <div class="footer-links"><a href="#">Privacy</a><a href="#">Legal notice</a><a href="#top">Back to top</a></div>
+          <div class="footer-links"><a href="privacidad.html">Privacy</a><a href="aviso-legal.html">Legal notice</a><a href="#top">Back to top</a></div>
         </footer>
       </div>
     </section>
   </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
   <script src="i18n.js"></script>
   <script src="main.js"></script>
 </body>
