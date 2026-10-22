@@ -36,3 +36,5 @@
 .legal-scroll { overflow-x: auto; }
 
 .legal .footer { margin-top: clamp(64px, 8vw, 120px); }
+.legal-inline-btn { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; font: inherit; }
+.legal-body .btn { margin-top: 8px; }

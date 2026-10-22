@@ -5,12 +5,9 @@ window.GD_ES = (function () {
   var es = {
     /* Document */
     'AGD Studio | Your ideas. Our digital vision.': 'AGD Studio | Tus ideas. Nuestra visión digital.',
-    'AGD Studio helps real estate agencies attract buyers and property owners through digital advertising, creative content, audiovisual production and lead generation strategies.':
-      'AGD Studio ayuda a inmobiliarias a atraer compradores y propietarios mediante publicidad digital, contenido creativo, producción audiovisual y estrategias de captación.',
 
     /* Navigation */
     'Skip to content': 'Saltar al contenido',
-    'AGD Studio, back to top': 'AGD Studio, volver arriba',
     'Main': 'Principal',
     'Services': 'Servicios',
     'Websites': 'Webs',
@@ -25,7 +22,6 @@ window.GD_ES = (function () {
 
     /* Hero */
     'Introduction': 'Introducción',
-    'Scroll to open the film': 'Desliza para abrir el vídeo',
     'Your ideas.': 'Tus ideas.',
     'Our digital vision.': 'Nuestra visión digital.',
     'We turn your goals into digital strategies that create opportunities.': 'Convertimos tus objetivos en estrategias digitales que generan oportunidades.',
@@ -34,7 +30,6 @@ window.GD_ES = (function () {
     'posting on social.': 'de publicar en redes.',
     'We understand what you want to achieve and build the digital strategy with you to make it happen.':
       'Entendemos lo que quieres conseguir y construimos contigo la estrategia digital para hacerlo posible.',
-    'Keep scrolling': 'Sigue bajando',
 
     /* Services */
     'From the ad to the opportunity.': 'Del anuncio a la oportunidad.',
@@ -79,8 +74,6 @@ window.GD_ES = (function () {
     'A single session can give us material for several pieces of content and ads.':
       'Una única sesión puede proporcionarnos material para crear diferentes contenidos y anuncios.',
     'Basic session': 'Sesión básica',
-    '€60': '60 €',
-    'Local travel within Gran Canaria': 'Desplazamiento local en Gran Canaria',
     'Up to 60 minutes': 'Hasta 60 minutos',
     'Photographs': 'Fotografías',
     'Vertical videos': 'Vídeos verticales',
@@ -88,7 +81,6 @@ window.GD_ES = (function () {
     'Material organized for campaigns and social media': 'Material organizado para campañas y redes',
     'Request a session': 'Solicitar una sesión',
     'Travel and conditions': 'Desplazamientos y condiciones',
-    'The €60 price covers local travel within Gran Canaria.': 'El precio de 60 € corresponde a desplazamientos locales en Gran Canaria.',
     'When a shoot requires special travel, for example to another island or trips that involve additional transport, the session will be quoted in advance based on distance, time and travel costs.':
       'Cuando la producción requiera desplazamientos especiales —por ejemplo, a otra isla o desplazamientos que impliquen transporte adicional—, el precio de la sesión se presupuestará previamente en función de la distancia, el tiempo y los costes de desplazamiento.',
     'We will always tell you about any additional cost before the session.': 'Siempre te informaremos del coste adicional antes de realizar la sesión.',
@@ -105,9 +97,6 @@ window.GD_ES = (function () {
     "A well-presented home conveys more information, builds more trust and makes the buyer's decision easier.":
       'Una vivienda bien presentada transmite más información, genera más confianza y facilita la decisión del comprador.',
     'Technical sheet': 'Ficha técnica',
-    '€45': '45 €',
-    'per home': '/ vivienda',
-    'One-off price per property, not a subscription': 'Precio único por vivienda, no es una suscripción',
     'Main property information': 'Información principal del inmueble',
     'Features and layout': 'Características y distribución',
     'Floor areas and top-down view': 'Superficies y perspectiva cenital',
@@ -141,17 +130,12 @@ window.GD_ES = (function () {
 
     /* Plans */
     'Monthly plans': 'Planes mensuales',
-    'Two ways to work together every month. Ad spend is not included in either plan and is always paid separately.':
-      'Dos formas de trabajar juntos cada mes. La inversión publicitaria no está incluida en ningún plan y se paga siempre aparte.',
     'Basic Plan': 'Plan Básico',
     'Complete Plan': 'Plan Completo',
     'For agencies that want to start making their digital lead generation more professional.':
       'Para inmobiliarias que quieren empezar a profesionalizar su captación digital.',
     'For agencies that want to turn their digital presence into a more complete lead generation system.':
       'Para inmobiliarias que quieren convertir su presencia digital en un sistema de captación más completo.',
-    '€200': '200 €',
-    '€400': '400 €',
-    '/month': '/mes',
     'Ad spend not included': 'Inversión publicitaria no incluida',
     'Initial': 'Inicial',
     'Personalized': 'Personalizada',
@@ -180,14 +164,10 @@ window.GD_ES = (function () {
     'Continuous analysis and optimization': 'Análisis y optimización continua',
     'Follow-up of the lead generation process': 'Seguimiento del proceso de captación',
     '1 content production session a month': '1 sesión mensual de producción de contenido',
-    'Request the Basic Plan': 'Solicitar Plan Básico',
-    'Request the Complete Plan': 'Solicitar Plan Completo',
     'About ad spend': 'Sobre la inversión publicitaria',
     'Ad spend is a necessary investment to extend the reach of the product. The advertising budget is paid separately and belongs entirely to the client, at their discretion.':
       'La inversión publicitaria es una partida necesaria para mejorar el alcance del producto. El presupuesto destinado a publicidad se paga aparte y pertenece íntegramente al cliente y su criterio.',
     'Also available separately': 'También por separado',
-    'Basic audiovisual session, €60': 'Sesión audiovisual básica, 60 €',
-    'Property technical sheet, €45 per home': 'Ficha técnica de la propiedad, 45 € / vivienda',
 
     /* Web design */
     'Websites built to be used, not just looked at.': 'Webs hechas para usarse, no solo para mirarse.',
@@ -330,13 +310,9 @@ window.GD_ES = (function () {
     'Area': 'Superficie',
 
     /* Selected work */
-    'Selected work': 'Proyectos seleccionados',
-    'Recent projects across architecture, property, hospitality and retail. Hover a project to scroll through its site.':
-      'Proyectos recientes de arquitectura, inmobiliaria, hostelería y comercio. Pasa el cursor por un proyecto para recorrer su web.',
     'Scroll': 'Desliza',
     'Industry': 'Sector',
     'Service': 'Servicio',
-    'Year': 'Año',
     'Hospitality': 'Hostelería',
     'Beauty': 'Belleza',
     'Website and visual identity': 'Web e identidad visual',
@@ -469,6 +445,118 @@ window.GD_ES = (function () {
       'AGD Studio es responsable de los datos que nos envías. Solo los usamos para responder a tu consulta y, si nos lo pides, preparar un presupuesto (base jurídica: medidas precontractuales a petición tuya). No se ceden a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a hello@gdcompany.com.',
     'Privacy policy': 'Política de privacidad',
 
+    /* Site structure (pages, navigation, overview cards) */
+    'AGD Studio is a digital studio. Advertising, content, websites and digitalization for real estate agencies, businesses and entrepreneurs.':
+      'AGD Studio es un estudio digital. Publicidad, contenido, webs y digitalización para inmobiliarias, empresas y emprendedores.',
+    'What we do | AGD Studio': 'Qué hacemos | AGD Studio',
+    'Advertising and lead generation, creatives and content, web design, brand visibility and business digitalization. Custom quotes for every project.':
+      'Publicidad y captación, creatividades y contenido, diseño web, visibilidad de marca y digitalización de negocios. Presupuesto personalizado para cada proyecto.',
+    'Who we work with | AGD Studio': 'Con quién trabajamos | AGD Studio',
+    'Digital solutions for real estate agencies, businesses and SMEs, and entrepreneurs and independent professionals. Custom quotes for every project.':
+      'Soluciones digitales para inmobiliarias, empresas y pymes, y emprendedores y profesionales independientes. Presupuesto personalizado para cada proyecto.',
+    'About us | AGD Studio': 'Quiénes somos | AGD Studio',
+    'AGD Studio is a digital studio: creativity, technology, branding and strategy, and how a project with us runs.':
+      'AGD Studio es un estudio digital: creatividad, tecnología, branding y estrategia, y cómo funciona un proyecto con nosotros.',
+    'AGD Studio, home': 'AGD Studio, inicio',
+    'Home': 'Inicio',
+    'What we do': 'Qué hacemos',
+    'Who we work with': 'Con quién trabajamos',
+    'About us': 'Quiénes somos',
+    'About us:': 'Quiénes somos:',
+    'Show services': 'Mostrar servicios',
+    'Show client types': 'Mostrar tipos de cliente',
+    'Creatives and content': 'Creatividades y contenido',
+    'Web design and development': 'Diseño y desarrollo web',
+    'Business digitalization': 'Digitalización de negocios',
+    'Real estate agencies': 'Inmobiliarias',
+    'Businesses and SMEs': 'Empresas y pymes',
+    'Entrepreneurs and professionals': 'Emprendedores y profesionales',
+    'Footer': 'Pie de página',
+    'Cookie settings': 'Configuración de cookies',
+    'Email': 'Correo electrónico',
+    'Advertising, content, websites and digitalization for real estate agencies, businesses and entrepreneurs.':
+      'Publicidad, contenido, webs y digitalización para inmobiliarias, empresas y emprendedores.',
+    'Explore our services': 'Descubre nuestros servicios',
+    'AGD Studio is a digital studio. We understand what you want to achieve and build the digital strategy with you to make it happen, combining advertising, content, web technology and data.':
+      'AGD Studio es un estudio digital. Entendemos lo que quieres conseguir y construimos contigo la estrategia digital para hacerlo posible, combinando publicidad, contenido, tecnología web y datos.',
+    'About the studio': 'Conoce el estudio',
+    'Five areas of work. Pick the one you need, or let us combine them into one strategy.':
+      'Cinco áreas de trabajo. Elige la que necesitas o deja que las combinemos en una sola estrategia.',
+    'Campaigns on Meta and Google designed to generate contacts and business opportunities, with follow-up and regular reports.':
+      'Campañas en Meta y Google orientadas a generar contactos y oportunidades comerciales, con seguimiento e informes periódicos.',
+    'See details': 'Ver detalles',
+    'Photography, video, reels and ad copy that turn your business and your properties into content people act on.':
+      'Fotografía, vídeo, reels y textos publicitarios que convierten tu negocio y tus propiedades en contenido que invita a actuar.',
+    'Websites designed from scratch, built with modern code and tested on every screen.':
+      'Webs diseñadas desde cero, programadas con código moderno y probadas en todas las pantallas.',
+    'A place on our platform, introductions to our network and content that keeps your brand in view.':
+      'Un lugar en nuestra plataforma, presentaciones a nuestra red y contenido que mantiene tu marca a la vista.',
+    'Online shops, bookings, automatic replies, and quotes and invoices handled online instead of on paper.':
+      'Tiendas online, reservas, respuestas automáticas, y presupuestos y facturas gestionados online en lugar de en papel.',
+    'The same studio, a different starting point for each kind of client.': 'El mismo estudio, un punto de partida distinto para cada tipo de cliente.',
+    'Lead generation, property content, technical sheets and monthly plans designed for agencies.':
+      'Captación, contenido de inmuebles, fichas técnicas y planes mensuales pensados para inmobiliarias.',
+    'See solutions': 'Ver soluciones',
+    'Find your solution': 'Encuentra tu solución',
+    "Tell us what you want to achieve and we'll work out with you how we can help. Every proposal is tailored to your needs and the scope of the project.":
+      'Cuéntanos qué quieres conseguir y estudiaremos contigo cómo podemos ayudarte. Cada propuesta se adapta a tus necesidades y al alcance del proyecto.',
+    'Request a custom quote': 'Solicita un presupuesto personalizado',
+    'Discuss your project': 'Hablemos de tu proyecto',
+
+    /* What we do */
+    'From the ad to the website behind it. Each service works on its own, and they work best together. Every proposal is tailored to your project.':
+      'Del anuncio a la web que hay detrás. Cada servicio funciona por separado, y juntos funcionan mejor. Cada propuesta se adapta a tu proyecto.',
+    'Services on this page': 'Servicios en esta página',
+    'Advertising and content': 'Publicidad y contenido',
+    'Real estate agencies can take this as a monthly plan.': 'Las inmobiliarias pueden contratarlo como plan mensual.',
+    'See the plans': 'Ver los planes',
+    'See what a session includes': 'Qué incluye una sesión',
+    'Sample sites designed by the studio to show the approach. They are not client websites.':
+      'Webs de ejemplo diseñadas por el estudio para mostrar nuestro enfoque. No son webs de clientes.',
+    'Illustrative example. Ferrer Carpentry is a fictional business.': 'Ejemplo ilustrativo. Carpintería Ferrer es un negocio ficticio.',
+
+    /* Who we work with */
+    "Find your situation and go straight to the solutions that fit it. If you don't see yourself here, tell us about your project anyway.":
+      'Encuentra tu caso y ve directo a las soluciones que encajan. Si no te ves aquí, cuéntanos tu proyecto igualmente.',
+    'Client types on this page': 'Tipos de cliente en esta página',
+    'Illustrative example of a listing website. The properties and prices are not real.':
+      'Ejemplo ilustrativo de web de anuncios. Los inmuebles y los precios no son reales.',
+    'Two ways to work together every month. Each plan is quoted for your agency, its goals and its scope. Ad spend is not included in either plan and is always paid separately.':
+      'Dos formas de trabajar juntos cada mes. Cada plan se presupuesta según tu inmobiliaria, sus objetivos y su alcance. La inversión publicitaria no está incluida en ningún plan y se paga siempre aparte.',
+    'Custom pricing': 'Precio personalizado',
+    'Contact us for a tailored proposal. Ad spend not included.': 'Contáctanos para recibir una propuesta a medida. Inversión publicitaria no incluida.',
+    'Request a quote for the Basic Plan': 'Pedir presupuesto del Plan Básico',
+    'Request a quote for the Complete Plan': 'Pedir presupuesto del Plan Completo',
+    'Basic audiovisual session': 'Sesión audiovisual básica',
+    'Services per property': 'Servicios por inmueble',
+    'Book them on their own or alongside a monthly plan. We quote each one in advance, so you know the cost before we start.':
+      'Contrátalos por separado o junto a un plan mensual. Presupuestamos cada uno por adelantado, para que conozcas el coste antes de empezar.',
+    'Pricing on request': 'Precio bajo petición',
+    'Local travel within Gran Canaria included in the quote': 'Desplazamiento local en Gran Canaria incluido en el presupuesto',
+    'The quote for a basic session covers local travel within Gran Canaria.': 'El presupuesto de una sesión básica cubre los desplazamientos locales en Gran Canaria.',
+    'One-off service per property, not a subscription': 'Servicio único por vivienda, no es una suscripción',
+    'Modernize how you show up online.': 'Moderniza cómo te presentas en internet.',
+    'Corporate websites and landing pages': 'Webs corporativas y landing pages',
+    'Web design': 'Diseño web',
+    'Processes and automation': 'Procesos y automatización',
+    'Newsletters, WhatsApp, forms and automatic replies that still feel personal. Quotes, invoices and appointments handled online instead of on paper.':
+      'Newsletters, WhatsApp, formularios y respuestas automáticas que siguen sonando cercanas. Presupuestos, facturas y citas gestionados online en lugar de en papel.',
+    'Digitalization': 'Digitalización',
+    'Visibility': 'Visibilidad',
+    'A professional presence from day one.': 'Presencia profesional desde el primer día.',
+    'Your website or landing page': 'Tu web o landing page',
+    'Designed from scratch, fast, and yours to edit without calling a developer.': 'Diseñada desde cero, rápida y editable por ti sin llamar a un programador.',
+    'A recognizable brand': 'Una marca reconocible',
+    'How we work': 'Cómo trabajamos',
+    'Sell online': 'Vende online',
+    'Content for your channels': 'Contenido para tus canales',
+    'Selling or renting your home?': '¿Vendes o alquilas tu vivienda?',
+
+    /* About */
+    'Design concepts': 'Conceptos de diseño',
+    'Sample sites designed by the studio to show the approach across architecture, property, hospitality and retail. Hover a concept to scroll through it.':
+      'Webs de ejemplo diseñadas por el estudio para mostrar nuestro enfoque en arquitectura, inmobiliaria, hostelería y comercio. Pasa el cursor por un concepto para recorrerlo.',
+
     /* Strings built in main.js */
     'Add your name so we know who to reply to.': 'Escribe tu nombre para saber a quién responder.',
     'Enter an email address like you@company.com.': 'Introduce un email como tu@empresa.com.',
@@ -480,7 +568,7 @@ window.GD_ES = (function () {
   };
 
   ['Atelier Norte', 'Costa Habitat', 'Maré', 'Solenne'].forEach(function (n) {
-    es['Preview of the ' + n + ' website. Focus to scroll through it.'] = 'Vista previa de la web de ' + n + '. Enfoca para recorrerla.';
+    es['Preview of the ' + n + ' concept. Focus to scroll through it.'] = 'Vista previa del concepto ' + n + '. Enfoca para recorrerlo.';
   });
   return es;
 })();

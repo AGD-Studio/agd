@@ -6,7 +6,6 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var hasGsap = !!(window.gsap && window.ScrollTrigger);
-  if (!hasGsap) root.classList.add('static-hero');
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -136,17 +135,17 @@
 
   var WORK = [
     { layout: 'wide', items: [
-      { demo: 'norte', industry: 'Architecture', service: 'Website and visual identity', year: '2026',
+      { demo: 'norte', industry: 'Architecture', service: 'Website and visual identity',
         desc: 'A portfolio that lets the buildings speak: large imagery, quiet type and project pages built like printed monographs.' }
     ] },
     { layout: 'pair', items: [
-      { demo: 'costa', industry: 'Real estate', service: 'Property platform', year: '2026',
+      { demo: 'costa', industry: 'Real estate', service: 'Property platform',
         desc: 'Searchable listings with a map view, saved favourites and a page for every home that agents update in minutes.' },
-      { demo: 'mare', industry: 'Hospitality', service: 'Website and reservations', year: '2025',
+      { demo: 'mare', industry: 'Hospitality', service: 'Website and reservations',
         desc: 'A restaurant site that reads like the menu: seasonal, short and one tap from booking a table.' }
     ] },
     { layout: 'wide', items: [
-      { demo: 'solenne', industry: 'Beauty', service: 'Online shop and launch campaign', year: '2025',
+      { demo: 'solenne', industry: 'Beauty', service: 'Online shop and launch campaign',
         desc: 'Shop, product story and launch campaign for a skincare line built around three products.' }
     ] }
   ];
@@ -359,6 +358,7 @@
      ------------------------------------------------------------------ */
   (function visibility() {
     var ways = $$('.way'), orbit = $('.orbit');
+    if (!orbit || !ways.length) return;
     function setWay(way) {
       var keys = way.dataset.k.split(' ');
       ways.forEach(function (w) { w.classList.toggle('is-on', w === way); });
@@ -464,9 +464,9 @@
       return '<div class="work-row work-row--' + row.layout + '">' + row.items.map(function (w) {
         var d = DEMOS[w.demo];
         return '<article class="work">' +
-          '<div class="work-preview" tabindex="0" data-cursor="Scroll" aria-label="Preview of the ' + d.name + ' website. Focus to scroll through it.">' + miniSite(w.demo) + '</div>' +
+          '<div class="work-preview" tabindex="0" data-cursor="Scroll" aria-label="Preview of the ' + d.name + ' concept. Focus to scroll through it.">' + miniSite(w.demo) + '</div>' +
           '<div class="work-meta"><div><h3>' + d.name + '</h3><p class="work-desc">' + w.desc + '</p></div>' +
-          '<dl><dt>Industry</dt><dd>' + w.industry + '</dd><dt>Service</dt><dd>' + w.service + '</dd><dt>Year</dt><dd>' + w.year + '</dd></dl></div>' +
+          '<dl><dt>Industry</dt><dd>' + w.industry + '</dd><dt>Service</dt><dd>' + w.service + '</dd></dl></div>' +
           '</article>';
       }).join('') + '</div>';
     }).join('');
@@ -475,6 +475,7 @@
   /* ------------------------------------------------------------------
      Contact form
      ------------------------------------------------------------------ */
+  var preselect = function () {};
   (function form() {
     var f = $('#form'), status = $('#form-status');
     if (!f) return;
@@ -500,13 +501,16 @@
       status.classList.add('is-ok');
       status.textContent = t('Thanks, ') + name.split(' ')[0] + t('. Your email app should open with the brief ready to send. If it doesn\'t, write to ') + EMAIL + '.';
     });
-    // Links that point at the form can preselect a project type
-    $$('a[data-type]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        var r = f.querySelector('input[name="type"][value="' + a.dataset.type + '"]');
-        if (r) r.checked = true;
-      });
-    });
+    // Links to /?service=<key>#contact preselect a project type, on arrival or without leaving the page
+    preselect = function (key) {
+      var r = key && f.querySelector('input[name="type"][data-key="' + key.replace(/[^a-z]/g, '') + '"]');
+      if (r) r.checked = true;
+    };
+    var params = new URLSearchParams(location.search);
+    if (params.has('service')) {
+      preselect(params.get('service'));
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
   })();
 
   /* ------------------------------------------------------------------
@@ -514,7 +518,7 @@
      ------------------------------------------------------------------ */
   var lenis = null;
   if (window.Lenis && !reduceMotion) {
-    lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.95, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
     if (hasGsap) {
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -526,7 +530,7 @@
   function scrollToTarget(hash) {
     var target = hash === '#top' ? 0 : $(hash);
     if (target === null) return false;
-    if (lenis) lenis.scrollTo(target, { duration: 1.6, easing: function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; } });
+    if (lenis) lenis.scrollTo(target, { offset: target === 0 ? 0 : -88, duration: 1, easing: function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; } });
     else if (target === 0) window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     return true;
@@ -544,35 +548,72 @@
     if (lenis) open ? lenis.stop() : lenis.start();
   }
   menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); menuBtn.focus(); } });
 
-  $$('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var hash = a.getAttribute('href');
-      if (hash.length < 2) { e.preventDefault(); return; }
-      if (document.body.classList.contains('menu-open')) setMenu(false);
-      if (scrollToTarget(hash)) {
-        e.preventDefault();
-        if (hash !== '#top' && hash !== '#main') history.replaceState(null, '', hash);
-      }
+  // Dropdowns: hover opens them with CSS; the chevron button opens them for keyboard and touch
+  var navItems = $$('.nav-item');
+  function setSub(item, open) {
+    item.classList.toggle('is-open', open);
+    $('.nav-sub-btn', item).setAttribute('aria-expanded', String(open));
+  }
+  navItems.forEach(function (item) {
+    var btn = $('.nav-sub-btn', item);
+    btn.addEventListener('click', function () {
+      var open = !item.classList.contains('is-open');
+      navItems.forEach(function (o) { setSub(o, false); });
+      setSub(item, open);
+      if (open) $('.nav-sub a', item).focus();
+    });
+    item.addEventListener('focusout', function (e) { if (!item.contains(e.relatedTarget)) setSub(item, false); });
+  });
+  document.addEventListener('click', function (e) {
+    navItems.forEach(function (item) { if (!item.contains(e.target)) setSub(item, false); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (document.body.classList.contains('menu-open')) { setMenu(false); menuBtn.focus(); return; }
+    navItems.forEach(function (item) {
+      if (item.classList.contains('is-open')) { setSub(item, false); $('.nav-sub-btn', item).focus(); }
     });
   });
 
-  var darkEls = $$('[data-dark]'), lastY = window.scrollY, filmOpen = false;
-  var sections = $$('main section[id]'), navLinks = $$('.nav-links a');
+  // Mark the current page in the main navigation
+  function cleanPath(path) { return path.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '') || '/'; }
+  var here = cleanPath(location.pathname);
+  $$('.nav-links > a, .nav-item > a, .menu a.big').forEach(function (a) {
+    var url = new URL(a.href, location.href);
+    if (!url.hash && cleanPath(url.pathname) === here) a.setAttribute('aria-current', 'page');
+  });
+
+  // Links to a section on this same page scroll there smoothly (works for "#x" and "/page#x")
+  $$('a[href*="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || cleanPath(url.pathname) !== here) return;
+      var hash = url.hash;
+      if (hash.length < 2) return;
+      if (document.body.classList.contains('menu-open')) setMenu(false);
+      preselect(url.searchParams.get('service'));
+      if (scrollToTarget(hash)) {
+        e.preventDefault();
+        if (hash !== '#top' && hash !== '#main') history.replaceState(null, '', hash);
+        if (hash === '#main') $('#main').focus({ preventScroll: true });
+      }
+    });
+  });
+  if ($('#main')) $('#main').setAttribute('tabindex', '-1');
+
+  var darkEls = $$('[data-dark]'), lastY = window.scrollY;
   function onScroll() {
     var y = window.scrollY;
-    var probe = 42, dark = filmOpen;
+    var probe = 42, dark = false;
     darkEls.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top <= probe && r.bottom >= probe) dark = true; });
     nav.classList.toggle('on-dark', dark);
-    if (!document.body.classList.contains('menu-open')) {
+    nav.classList.toggle('is-scrolled', y > 24);
+    if (!document.body.classList.contains('menu-open') && !nav.contains(document.activeElement)) {
       if (y > lastY + 6 && y > window.innerHeight * .8) nav.classList.add('is-hidden');
       else if (y < lastY - 6 || y < 80) nav.classList.remove('is-hidden');
     }
     lastY = y;
-    var mid = window.innerHeight * .4, currentId = null;
-    sections.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) currentId = s.id; });
-    navLinks.forEach(function (l) { l.setAttribute('aria-current', String(l.getAttribute('href') === '#' + currentId)); });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   nav.addEventListener('focusin', function () { nav.classList.remove('is-hidden'); });
@@ -605,17 +646,27 @@
   }
 
   /* ------------------------------------------------------------------
-     Hero film: plays only while visible
+     Hero film: shown in place from the first paint (poster), plays only while visible.
+     Small screens get the 360p file; reduced motion and data saver keep the still poster.
      ------------------------------------------------------------------ */
   var video = $('.hero-film video');
-  if (video) {
-    if (reduceMotion) { video.removeAttribute('autoplay'); video.pause(); }
-    else if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) {
-        if (en[0].isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
-        else video.pause();
-      }).observe($('.hero'));
-    }
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (video && !reduceMotion && !saveData && 'IntersectionObserver' in window) {
+    var base = video.getAttribute('data-film');
+    var size = window.matchMedia('(max-width: 767px)').matches ? '-360' : '-720';
+    [['webm', 'video/webm; codecs="vp9"'], ['mp4', 'video/mp4']].forEach(function (f) {
+      var src = document.createElement('source');
+      src.src = base + size + '.' + f[0];
+      src.type = f[1];
+      video.appendChild(src);
+    });
+    video.muted = true;
+    new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) {
+        if (video.preload === 'none') { video.preload = 'auto'; video.load(); }
+        var p = video.play(); if (p && p.catch) p.catch(function () {});
+      } else video.pause();
+    }).observe(video);
   }
 
   /* ------------------------------------------------------------------
@@ -623,35 +674,10 @@
      ------------------------------------------------------------------ */
   function intro() {
     if (!hasGsap || reduceMotion) return;
-    gsap.from('.hero-title .line > span', { yPercent: 115, duration: 1.4, stagger: .09, ease: 'expo.out' });
-    gsap.from('.hero-foot > *', { y: 24, opacity: 0, duration: 1.1, stagger: .08, delay: .35, ease: 'expo.out' });
-    gsap.from('.hero-film', { opacity: 0, duration: 1.4, delay: .25, ease: 'power2.out' });
     gsap.from('.nav-bar > *', { y: -16, opacity: 0, duration: 1, stagger: .06, delay: .2, ease: 'expo.out' });
-  }
-
-  function heroScroll() {
-    if (!hasGsap || reduceMotion) return;
-    var pin = $('.hero-pin'), win = $('.hero-window'), film = $('.hero-film');
-    function startClip() {
-      var p = pin.getBoundingClientRect(), w = win.getBoundingClientRect();
-      return 'inset(' + (w.top - p.top) + 'px ' + (p.right - w.right) + 'px ' + (p.bottom - w.bottom) + 'px ' + (w.left - p.left) + 'px round 10px)';
-    }
-    var lines = $$('.hero-statement .line > span');
-    gsap.set(lines, { yPercent: 105 });
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true,
-        onUpdate: function (self) {
-          var open = self.progress > .42;
-          if (open !== filmOpen) { filmOpen = open; onScroll(); }
-        }
-      }
-    });
-    tl.fromTo(film, { clipPath: startClip }, { clipPath: 'inset(0px 0px 0px 0px round 0px)', ease: 'power2.inOut', duration: 1 }, 0)
-      .to('.hero-layout', { yPercent: -10, opacity: 0, ease: 'power1.in', duration: .55 }, .05)
-      .to(lines, { yPercent: 0, stagger: .1, duration: .5, ease: 'power3.out' }, .8)
-      .to('.hero-statement-meta', { opacity: 1, duration: .3 }, 1.05)
-      .to({}, { duration: .4 });
+    if (!$('.hero-title')) return;
+    gsap.from('.hero-title .line > span', { yPercent: 115, duration: 1.2, stagger: .09, ease: 'expo.out' });
+    gsap.from('.hero-foot > *', { y: 24, opacity: 0, duration: 1.1, stagger: .08, delay: .35, ease: 'expo.out' });
   }
 
   // Re-runnable so the word-by-word reveal is rebuilt when the language changes
@@ -681,7 +707,7 @@
     // Section headings, then their intro paragraph
     $$('.section .head').forEach(function (head) {
       gsap.from(head.children, {
-        y: 70, opacity: 0, duration: 1.4, stagger: .12, ease: ease, clearProps: 'transform,opacity',
+        y: 40, opacity: 0, duration: 1.1, stagger: .1, ease: ease, clearProps: 'transform,opacity',
         scrollTrigger: { trigger: head, start: 'top 86%', once: true }
       });
     });
@@ -691,36 +717,29 @@
       '.offer-index', '.offer-head', '.offer-body', '.price-card', '.sheet', '.path', '.paths-goal',
       '.plan', '.plans-note', '.plans-extra', '.philosophy > *', '.contact-lead', '.pick', '.bench-tools', '.web-facts > div',
       '.way', '.vis-cta', '.audiences > div', '.outcome', '.re-who > div',
-      '.re-services .h3', '.re-services li', '.about-mark', '.pillars > div', '.process h3', '.step',
-      '.form .field', '.form fieldset', '.form-end', '.form-legal', '.direct > div', '.work-meta', '.footer'
+      '.re-services h3', '.re-services li', '.about-mark', '.pillars > div', '.process > h2', '.step',
+      '.form .field', '.form fieldset', '.form-end', '.form-legal', '.direct > div', '.work-meta', '.footer',
+      '.intro-body > *', '.card', '.section-cta', '.cta-actions'
     ].join(','));
-    gsap.set(items, { y: 44, opacity: 0 });
+    gsap.set(items, { y: 28, opacity: 0 });
     ScrollTrigger.batch(items, {
       start: 'top 92%', once: true,
       onEnter: function (batch) {
-        gsap.to(batch, { y: 0, opacity: 1, duration: 1.2, stagger: .075, ease: ease, overwrite: true, clearProps: 'transform,opacity' });
+        gsap.to(batch, { y: 0, opacity: 1, duration: 1, stagger: .06, ease: ease, overwrite: true, clearProps: 'transform,opacity' });
       }
     });
 
     // Large interactive pieces rise and settle
-    $$('.stage, .compare, .listing, .orbit').forEach(function (el) {
+    $$('.stage, .compare, .listing, .orbit, .work-preview').forEach(function (el) {
       gsap.from(el, {
-        y: 90, opacity: 0, scale: .965, duration: 1.6, ease: ease, clearProps: 'transform,opacity',
+        y: 48, opacity: 0, scale: .98, duration: 1.2, ease: ease, clearProps: 'transform,opacity',
         scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       });
     });
 
-    // Project previews open like a window as they scroll in
-    $$('.work-preview').forEach(function (el) {
-      gsap.fromTo(el, { clipPath: 'inset(12% 7% 0% 7% round 28px)' }, {
-        clipPath: 'inset(0% 0% 0% 0% round 12px)', ease: 'none',
-        scrollTrigger: { trigger: el, start: 'top 96%', end: 'top 40%', scrub: .7 }
-      });
-    });
-
     // The closing headline slides in line by line
-    gsap.from('.contact-title span', {
-      yPercent: 60, opacity: 0, duration: 1.5, stagger: .14, ease: ease, clearProps: 'transform,opacity',
+    if ($('.contact-title')) gsap.from('.contact-title span', {
+      yPercent: 60, opacity: 0, duration: 1.2, stagger: .14, ease: ease, clearProps: 'transform,opacity',
       scrollTrigger: { trigger: '.contact-title', start: 'top 85%', once: true }
     });
   }
@@ -740,21 +759,20 @@
   }
 
   applyLang();
-  heroScroll();
   reveals();
   magnetic();
   onScroll();
   root.classList.remove('i18n-pending');
 
-  // Loader: wait for fonts (max ~2s), lift the curtain, then play the opening
+  // Loader (home, first visit of the session): wait for fonts (max 1.6s), lift the curtain, then play the opening
   var loader = $('.loader');
-  var showLoader = !root.classList.contains('no-loader');
+  var showLoader = !!loader && !root.classList.contains('no-loader');
   if (!showLoader) { intro(); }
   else {
     var started = Date.now(), done = false;
     var finish = function () {
       if (done) return; done = true;
-      var wait = Math.max(0, 1500 - (Date.now() - started));
+      var wait = Math.max(0, 1000 - (Date.now() - started));
       setTimeout(function () {
         loader.classList.add('is-done');
         setTimeout(intro, 280);
@@ -762,7 +780,7 @@
       }, wait);
     };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(finish);
-    setTimeout(finish, 2200);
+    setTimeout(finish, 1600);
   }
 
   if (hasGsap) {

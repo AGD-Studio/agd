@@ -7,10 +7,12 @@ Este documento no sustituye el asesoramiento de un profesional jurídico.
 
 - Sitio estático (HTML, CSS y JS) sin servidor propio, base de datos, cuentas de usuario ni pagos.
 - El formulario de contacto no envía nada: abre la aplicación de correo del visitante (`mailto:`).
-- Sin cookies, analítica ni scripts de terceros. Las tipografías y las bibliotecas (GSAP 3.12.5, Lenis 1.1.13) se sirven desde `fonts.css`, `assets/fonts/` y `vendor/`.
-- Almacenamiento en el navegador: `gd-lang` (localStorage, idioma elegido) y `gd-intro` (sessionStorage, animación de carga).
+- Sin cookies, analítica ni scripts de terceros. Las tipografías, el vídeo y las bibliotecas (GSAP 3.12.5, Lenis 1.1.13) se sirven desde `fonts.css`, `assets/` y `vendor/`.
+- Almacenamiento en el navegador: `gd-lang` (localStorage, idioma elegido), `gd-intro` (sessionStorage, animación de carga) y `agd-consent` (localStorage, solo si se guarda una elección de cookies).
+- Páginas legales: `/legal-notice`, `/privacy-policy`, `/cookie-policy`. Las URL antiguas (`aviso-legal.html`, `privacidad.html`) redirigen con 308 desde `vercel.json`.
+- No hay `/terms-and-conditions`: el sitio no vende ni cobra en línea. Si eso cambia, hacen falta condiciones de contratación.
 
-**Antes de añadir analítica, píxeles, vídeos o mapas incrustados, chat o un formulario con backend:** hay que implantar un mecanismo de consentimiento que bloquee esas herramientas hasta que el visitante acepte, actualizar `privacidad.html` y ampliar la CSP de `vercel.json`.
+**Antes de añadir analítica, píxeles, vídeos o mapas incrustados, chat o un formulario con backend:** registrar la herramienta en `SERVICES` dentro de `consent.js` y cargarla con `<script type="text/plain" data-consent="analytics" data-src="...">` (el aviso de cookies aparece solo y bloquea la herramienta hasta que se acepta), subir `POLICY_VERSION`, actualizar `cookie-policy.html` y `privacy-policy.html` y ampliar la CSP de `vercel.json`.
 
 ## 2. Registro de actividades de tratamiento (borrador, art. 30 RGPD)
 
@@ -48,5 +50,6 @@ Ejemplos: acceso indebido al correo, envío de datos a quien no corresponde, pé
 - Activar la verificación en dos pasos en Vercel, el registrador del dominio, el correo, GitHub, Meta Business y Google Ads.
 - El código del sitio debe estar en un repositorio propio y privado. Ahora mismo la carpeta del proyecto forma parte de un repositorio git cuya raíz es la carpeta personal del usuario, que no debe subirse nunca a un remoto.
 - Copias de seguridad: el repositorio sirve de copia del sitio. Para el correo y los datos de clientes, hacer una copia periódica y probar a restaurarla al menos una vez al año.
-- Tras cambiar el script en línea de `index.html`, recalcular su hash SHA-256 en la CSP de `vercel.json`; si no, el navegador lo bloqueará.
+- No hay scripts en línea: todo el JavaScript está en archivos propios (`boot.js`, `consent.js`, `main.js`, `i18n.js`), así que la CSP es `script-src 'self'`. No añadir `<script>` en línea; la CSP los bloquearía.
+- Textos nuevos en inglés necesitan su traducción en `i18n.js` (la clave es el texto inglés exacto).
 - Al actualizar GSAP o Lenis, descargar la versión exacta a `vendor/` y comprobar su hash con el que publica la CDN.
