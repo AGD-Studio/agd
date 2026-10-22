@@ -1,8 +1,9 @@
 /* AGD Studio — consent for cookies and similar technologies (LSSI-CE art. 22.2, GDPR, AEPD guidance).
 
    Today the site only uses strictly necessary browser storage (see /cookie-policy), which needs no
-   consent, so SERVICES is empty and no banner appears. The "Cookie settings" link still opens a panel
-   that says so.
+   consent, so SERVICES is empty. First-time visitors still get a short notice linking the cookie and
+   privacy policies; accepting it is remembered like any other choice. The "Cookie settings" link opens
+   a panel that explains there is nothing optional.
 
    To add an optional tool (analytics, advertising pixel, embedded video, map...):
      1. List it in SERVICES with its category.
@@ -10,7 +11,7 @@
           <script type="text/plain" data-consent="analytics" data-src="/vendor/tool.js"></script>
         It is turned into a real script only after the visitor accepts that category.
      3. Describe it in cookie-policy.html and privacy-policy.html, and allow its domains in the CSP (vercel.json).
-   The banner then appears on its own, with Accept, Reject and Configure given equal weight.
+   The banner then switches to Accept, Reject and Configure, given equal weight.
    Bump POLICY_VERSION whenever the list changes so everyone is asked again. */
 (function () {
   'use strict';
@@ -25,6 +26,8 @@
       title: 'Cookie settings',
       intro: 'Choose which optional technologies we may use. Necessary storage is always on because the site needs it to work. You can change your choice at any time from "Cookie settings" at the bottom of every page.',
       none: 'This website only stores what it needs to work: your language choice and, if you save one, your cookie preference. It does not use analytics, advertising or any other optional cookies, so there is nothing to accept or reject.',
+      notice: 'We only use the cookies this website needs to work. Read our cookie policy and privacy policy to see how we handle your data.',
+      privacy: 'privacy policy', cookies: 'cookie policy', ok: 'Accept',
       banner: 'We would like to use optional cookies for the purposes below. Nothing optional runs unless you accept it.',
       necessary: 'Necessary', necessaryDesc: 'Remember your language and interface state. Cannot be turned off.', always: 'Always on',
       analytics: 'Analytics', analyticsDesc: 'Measure visits so we can improve the site.',
@@ -36,6 +39,8 @@
       title: 'Configuración de cookies',
       intro: 'Elige qué tecnologías opcionales podemos usar. El almacenamiento necesario está siempre activo porque el sitio lo necesita para funcionar. Puedes cambiar tu elección cuando quieras desde «Configuración de cookies», al pie de cada página.',
       none: 'Este sitio solo guarda lo que necesita para funcionar: el idioma que eliges y, si la guardas, tu preferencia de cookies. No utiliza analítica, publicidad ni ninguna otra cookie opcional, así que no hay nada que aceptar ni rechazar.',
+      notice: 'Solo usamos las cookies que esta web necesita para funcionar. Lee nuestra política de cookies y nuestra política de privacidad para saber cómo tratamos tus datos.',
+      privacy: 'política de privacidad', cookies: 'política de cookies', ok: 'Aceptar',
       banner: 'Nos gustaría usar cookies opcionales para las finalidades siguientes. Nada opcional se activa si no lo aceptas.',
       necessary: 'Necesarias', necessaryDesc: 'Recuerdan tu idioma y el estado de la interfaz. No se pueden desactivar.', always: 'Siempre activas',
       analytics: 'Analítica', analyticsDesc: 'Medir las visitas para mejorar el sitio.',
@@ -104,19 +109,44 @@
     return a;
   }
 
-  /* ---------- Banner: only when there is something optional to decide ---------- */
+  // Puts real links on the policy names inside a sentence
+  function linked(text) {
+    var p = el('p');
+    var links = [[tr('cookies'), 'cookie-policy'], [tr('privacy'), 'privacy-policy']];
+    var rest = text;
+    links.forEach(function (l) {
+      var i = rest.indexOf(l[0]);
+      if (i < 0) return;
+      p.appendChild(document.createTextNode(rest.slice(0, i)));
+      var a = el('a', '', l[0]);
+      a.href = l[1];
+      p.appendChild(a);
+      rest = rest.slice(i + l[0].length);
+    });
+    p.appendChild(document.createTextNode(rest));
+    return p;
+  }
+
+  /* ---------- Banner: shown until the visitor answers ---------- */
   var banner = null;
   function showBanner() {
     hideBanner();
     banner = el('div', 'cc-banner');
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', tr('title'));
-    var p = el('p', '', tr('banner') + ' ');
-    p.appendChild(policyLink());
-    var actions = el('div', 'cc-actions');
-    actions.appendChild(button(tr('reject'), function () { decide(all(false)); }));
-    actions.appendChild(button(tr('configure'), openSettings));
-    actions.appendChild(button(tr('accept'), function () { decide(all(true)); }));
+    var p, actions = el('div', 'cc-actions');
+    if (active.length) {
+      p = el('p', '', tr('banner') + ' ');
+      p.appendChild(policyLink());
+      actions.appendChild(button(tr('reject'), function () { decide(all(false)); }));
+      actions.appendChild(button(tr('configure'), openSettings));
+      actions.appendChild(button(tr('accept'), function () { decide(all(true)); }));
+    } else {
+      // Nothing optional to switch on: an informative notice the visitor acknowledges once
+      p = linked(tr('notice'));
+      actions.appendChild(button(tr('configure'), openSettings));
+      actions.appendChild(button(tr('ok'), function () { decide({}); }));
+    }
     banner.appendChild(p);
     banner.appendChild(actions);
     document.body.appendChild(banner);
@@ -177,7 +207,8 @@
       }));
       actions.appendChild(button(tr('accept'), function () { done(all(true)); }));
     } else {
-      actions.appendChild(button(tr('close'), function () { d.close(); }));
+      // Accepting here also answers the first-visit notice
+      actions.appendChild(button(tr(record ? 'close' : 'ok'), function () { d.close(); if (!record) decide({}); }));
     }
     d.appendChild(actions);
     d.addEventListener('close', function () { d.remove(); });
@@ -193,7 +224,7 @@
   });
 
   function init() {
-    if (active.length && !record) {
+    if (!record) {
       showBanner();
       // Keep the banner in the visitor's language when they switch it
       new MutationObserver(function () { if (banner) showBanner(); })
