@@ -100,7 +100,7 @@
   }
   function policyLink() {
     var a = el('a', '', tr('policy'));
-    a.href = '/cookie-policy';
+    a.href = 'cookie-policy';
     return a;
   }
 

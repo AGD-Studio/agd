@@ -1,0 +1,7 @@
+# Keep tooling and notes out of the public deployment
+.agents
+.claude
+.DS_Store
+**/.DS_Store
+skills-lock.json
+docs
