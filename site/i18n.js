@@ -441,8 +441,8 @@ window.GD_ES = (function () {
     'Privacy': 'Privacidad',
     'Legal notice': 'Aviso legal',
     'Back to top': 'Volver arriba',
-    'AGD Studio is responsible for the details you send. We use them only to answer your enquiry and, if you ask for one, to prepare a quote (legal basis: steps taken at your request before a contract). They are not shared with third parties unless the law requires it. You can access, correct or delete them, among other rights, by writing to agd.studiogc@gmail.com.':
-      'AGD Studio es responsable de los datos que nos envías. Solo los usamos para responder a tu consulta y, si nos lo pides, preparar un presupuesto (base jurídica: medidas precontractuales a petición tuya). No se ceden a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a agd.studiogc@gmail.com.',
+    'AGD Studio is responsible for the details you send. We use them only to answer your enquiry and, if you ask for one, to prepare a quote (legal basis: steps taken at your request before a contract). The form reaches our inbox through FormSubmit, an email-delivery service; apart from that, your details are not shared with third parties unless the law requires it. You can access, correct or delete them, among other rights, by writing to agdstudiogc@gmail.com.':
+      'AGD Studio es responsable de los datos que nos envías. Solo los usamos para responder a tu consulta y, si nos lo pides, preparar un presupuesto (base jurídica: medidas precontractuales a petición tuya). El formulario nos llega a través de FormSubmit, un servicio de envío de correo; aparte de eso, no se ceden a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a agdstudiogc@gmail.com.',
     'Privacy policy': 'Política de privacidad',
 
     /* Site structure (pages, navigation, overview cards) */
@@ -563,8 +563,15 @@ window.GD_ES = (function () {
     'Tell us a little about the project.': 'Cuéntanos un poco sobre el proyecto.',
     'New project: ': 'Nuevo proyecto: ',
     'Thanks, ': 'Gracias, ',
-    '. Your email app should open with the brief ready to send. If it doesn\'t, write to ':
-      '. Tu aplicación de correo debería abrirse con el mensaje listo para enviar. Si no, escríbenos a '
+    '. Your message has been sent. We reply within two working days.':
+      '. Tu mensaje se ha enviado. Respondemos en un plazo de dos días laborables.',
+    'Sending…': 'Enviando…',
+    'Please wait a moment and send it again.': 'Espera un momento y vuelve a enviarlo.',
+    'We couldn\'t send your message. Please try again, or ': 'No hemos podido enviar tu mensaje. Inténtalo de nuevo o ',
+    'send it from your email app': 'envíalo desde tu aplicación de correo',
+    'open it in Gmail': 'ábrelo en Gmail',
+    ' or ': ' o ',
+    'Open in Gmail': 'Abrir en Gmail',
   };
 
   ['Atelier Norte', 'Costa Habitat', 'Maré', 'Solenne'].forEach(function (n) {

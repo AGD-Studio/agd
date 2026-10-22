@@ -352,13 +352,11 @@ ul, ol { list-style: none; }
 .hero-for { display: none; }
 
 @media (min-width: 900px) {
-  /* One screen tall: the film window takes the height left under the title, so it always fits the first viewport */
-  .hero-layout { height: 100vh; height: 100svh; min-height: 620px; grid-template-columns: repeat(12, 1fr); column-gap: 24px; grid-template-rows: auto minmax(0, 1fr); }
-  .hero-title { grid-column: 1 / -1; grid-row: 1; }
-  .hero-window { grid-column: 7 / -1; grid-row: 2; justify-self: end; align-self: end; width: auto; height: 100%; max-width: 100%; margin: 28px 0 0;
-    /* never taller than 16:9 of the six columns it sits in */
-    max-height: min(420px, calc(((min(100vw, var(--max)) - 2 * var(--gutter) - 264px) / 2 + 120px) * 9 / 16)); }
-  .hero-foot { grid-column: 1 / span 5; grid-row: 2; align-self: end; gap: 32px; }
+  /* The film runs the full width of the header as a wide band, at its final size from the first paint */
+  .hero-window { aspect-ratio: 21 / 9; max-height: 72vh; max-height: 72svh; }
+  .hero-foot { grid-template-columns: minmax(0, 1fr) auto; column-gap: 48px; }
+  .hero-foot .lead, .hero-for { grid-column: 1; }
+  .hero-actions { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
   .hero-for { display: block; }
 }
 
@@ -981,6 +979,13 @@ legend { font-size: var(--t-small); color: var(--muted); margin-bottom: 14px; pa
 .form-end { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
 .form-status { color: var(--muted); font-size: .95rem; max-width: 40ch; }
 .form-status.is-ok { color: var(--fg); }
+.form-status.is-err { color: var(--fg); }
+.form-status.is-err::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--sun); vertical-align: .1em; }
+.form-status a { text-decoration: underline; text-underline-offset: 3px; }
+.form .btn[disabled] { opacity: .6; cursor: progress; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.direct-alt { margin-top: 12px; font-size: var(--t-small); }
+.direct-alt a { text-decoration: underline; text-underline-offset: 3px; }
 .form-legal { max-width: 72ch; line-height: 1.5; }
 .form-legal a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
 

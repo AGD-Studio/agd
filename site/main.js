@@ -472,28 +472,88 @@
   (function form() {
     var f = $('#form'), status = $('#form-status');
     if (!f) return;
-    var EMAIL = 'agd.studiogc@gmail.com';
+    var EMAIL = 'agdstudiogc@gmail.com';
+    // The site is static, so enquiries are delivered by FormSubmit (no account or secret key involved).
+    // The first submission makes FormSubmit email an activation link to EMAIL; nothing is delivered until it is confirmed.
+    // Once active, FormSubmit offers a random alias that can replace EMAIL in this URL to keep the address out of the code.
+    var ENDPOINT = 'https://formsubmit.co/ajax/' + EMAIL;
+    var GMAIL = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + EMAIL;
+    var submit = $('button[type="submit"]', f), idle = status.textContent, openedAt = Date.now(), sending = false;
     function err(input, msg) {
       var e = $('.field-error', input.closest('.field'));
       if (e) e.textContent = msg || '';
       input.setAttribute('aria-invalid', msg ? 'true' : 'false');
       return !msg;
     }
+    // Drop control characters and cap the length, whatever the browser let through
+    function clean(v, max) { return v.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim().slice(0, max); }
+    function say(kind, text) {
+      status.classList.toggle('is-ok', kind === 'ok');
+      status.classList.toggle('is-err', kind === 'err');
+      status.textContent = text;
+    }
+    function link(href, text, blank) {
+      var a = document.createElement('a');
+      a.href = href; a.textContent = text;
+      if (blank) { a.target = '_blank'; a.rel = 'noopener'; }
+      return a;
+    }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = f.name.value.trim(), email = f.email.value.trim(), msg = f.message.value.trim();
+      if (sending) return;
+      var name = clean(f.name.value, 100), email = clean(f.email.value, 254), msg = clean(f.message.value, 1500);
       var ok = [
         err(f.name, name ? '' : t('Add your name so we know who to reply to.')),
-        err(f.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : t('Enter an email address like you@company.com.')),
+        err(f.email, /^[^\s@<>,;"]+@[^\s@<>,;"]+\.[^\s@<>,;"]{2,}$/.test(email) ? '' : t('Enter an email address like you@company.com.')),
         err(f.message, msg ? '' : t('Tell us a little about the project.'))
       ].every(Boolean);
       if (!ok) { $('[aria-invalid="true"]', f).focus(); return; }
-      var type = (f.querySelector('input[name="type"]:checked') || {}).value || 'Project';
-      var body = 'Name: ' + name + '\nEmail: ' + email + '\nCompany: ' + (f.company.value.trim() || '-') + '\nProject type: ' + type + '\n\n' + msg;
-      window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(t('New project: ') + type) + '&body=' + encodeURIComponent(body);
-      status.classList.add('is-ok');
-      status.textContent = t('Thanks, ') + name.split(' ')[0] + t('. Your email app should open with the brief ready to send. If it doesn\'t, write to ') + EMAIL + '.';
+      var first = name.split(' ')[0];
+      var done = function () { say('ok', t('Thanks, ') + first + t('. Your message has been sent. We reply within two working days.')); f.reset(); };
+      // Bots fill the hidden field: pretend it worked and send nothing
+      if (f.elements._honey.value) { done(); return; }
+      // Bots also submit instantly; a person asked to retry loses nothing
+      if (Date.now() - openedAt < 2500) { say('err', t('Please wait a moment and send it again.')); return; }
+
+      var type = (f.querySelector('input[name="type"]:checked') || {}).value || 'Something else';
+      var company = clean(f.company.value, 120) || '-';
+      var subject = '[AGD Studio web] ' + type + ' · ' + name;
+      var body = 'Enquiry category: ' + type + '\nName: ' + name + '\nEmail: ' + email + '\nCompany: ' + company + '\n\n' + msg;
+      sending = true;
+      submit.disabled = true;
+      f.setAttribute('aria-busy', 'true');
+      say('', t('Sending…'));
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: subject,
+          _replyto: email,
+          _template: 'table',
+          _captcha: 'false',
+          'Enquiry category': type,
+          Name: name,
+          Email: email,
+          Company: company,
+          Message: msg,
+          'Site language': lang === 'es' ? 'Spanish' : 'English'
+        })
+      }).then(function (r) {
+        return r.json().then(function (d) { if (!r.ok || String(d.success) !== 'true') throw new Error(d.message || r.status); });
+      }).then(done, function () {
+        // Keep what they wrote and offer the same brief through their own email
+        say('err', t('We couldn\'t send your message. Please try again, or '));
+        status.appendChild(link('mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), t('send it from your email app')));
+        status.appendChild(document.createTextNode(t(' or ')));
+        status.appendChild(link(GMAIL + '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), t('open it in Gmail'), true));
+        status.appendChild(document.createTextNode('.'));
+      }).then(function () {
+        sending = false;
+        submit.disabled = false;
+        f.removeAttribute('aria-busy');
+      });
     });
+    f.addEventListener('input', function () { if (status.classList.contains('is-ok')) say('', idle); });
     // Links to /?service=<key>#contact preselect a project type, on arrival or without leaving the page
     preselect = function (key) {
       var r = key && f.querySelector('input[name="type"][data-key="' + key.replace(/[^a-z]/g, '') + '"]');
