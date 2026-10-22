@@ -24,7 +24,7 @@
     en: {
       title: 'Cookie settings',
       intro: 'Choose which optional technologies we may use. Necessary storage is always on because the site needs it to work. You can change your choice at any time from "Cookie settings" at the bottom of every page.',
-      none: 'This website only stores what it needs to work: your language choice and whether you have already seen the opening animation. It does not use analytics, advertising or any other optional cookies, so there is nothing to accept or reject.',
+      none: 'This website only stores what it needs to work: your language choice and, if you save one, your cookie preference. It does not use analytics, advertising or any other optional cookies, so there is nothing to accept or reject.',
       banner: 'We would like to use optional cookies for the purposes below. Nothing optional runs unless you accept it.',
       necessary: 'Necessary', necessaryDesc: 'Remember your language and interface state. Cannot be turned off.', always: 'Always on',
       analytics: 'Analytics', analyticsDesc: 'Measure visits so we can improve the site.',
@@ -35,7 +35,7 @@
     es: {
       title: 'Configuración de cookies',
       intro: 'Elige qué tecnologías opcionales podemos usar. El almacenamiento necesario está siempre activo porque el sitio lo necesita para funcionar. Puedes cambiar tu elección cuando quieras desde «Configuración de cookies», al pie de cada página.',
-      none: 'Este sitio solo guarda lo que necesita para funcionar: el idioma que eliges y si ya has visto la animación de inicio. No utiliza analítica, publicidad ni ninguna otra cookie opcional, así que no hay nada que aceptar ni rechazar.',
+      none: 'Este sitio solo guarda lo que necesita para funcionar: el idioma que eliges y, si la guardas, tu preferencia de cookies. No utiliza analítica, publicidad ni ninguna otra cookie opcional, así que no hay nada que aceptar ni rechazar.',
       banner: 'Nos gustaría usar cookies opcionales para las finalidades siguientes. Nada opcional se activa si no lo aceptas.',
       necessary: 'Necesarias', necessaryDesc: 'Recuerdan tu idioma y el estado de la interfaz. No se pueden desactivar.', always: 'Siempre activas',
       analytics: 'Analítica', analyticsDesc: 'Medir las visitas para mejorar el sitio.',

@@ -441,8 +441,8 @@ window.GD_ES = (function () {
     'Privacy': 'Privacidad',
     'Legal notice': 'Aviso legal',
     'Back to top': 'Volver arriba',
-    'AGD Studio is responsible for the details you send. We use them only to answer your enquiry and, if you ask for one, to prepare a quote (legal basis: steps taken at your request before a contract). They are not shared with third parties unless the law requires it. You can access, correct or delete them, among other rights, by writing to hello@gdcompany.com.':
-      'AGD Studio es responsable de los datos que nos envías. Solo los usamos para responder a tu consulta y, si nos lo pides, preparar un presupuesto (base jurídica: medidas precontractuales a petición tuya). No se ceden a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a hello@gdcompany.com.',
+    'AGD Studio is responsible for the details you send. We use them only to answer your enquiry and, if you ask for one, to prepare a quote (legal basis: steps taken at your request before a contract). They are not shared with third parties unless the law requires it. You can access, correct or delete them, among other rights, by writing to agd.studiogc@gmail.com.':
+      'AGD Studio es responsable de los datos que nos envías. Solo los usamos para responder a tu consulta y, si nos lo pides, preparar un presupuesto (base jurídica: medidas precontractuales a petición tuya). No se ceden a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a agd.studiogc@gmail.com.',
     'Privacy policy': 'Política de privacidad',
 
     /* Site structure (pages, navigation, overview cards) */

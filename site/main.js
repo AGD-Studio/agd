@@ -4,9 +4,6 @@
 
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var hasGsap = !!(window.gsap && window.ScrollTrigger);
-  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
@@ -16,7 +13,7 @@
      ------------------------------------------------------------------ */
   var ES = window.GD_ES || {};
   var lang = root.getAttribute('data-lang') === 'es' ? 'es' : 'en';
-  var I18N_ATTRS = ['aria-label', 'placeholder', 'data-cursor'];
+  var I18N_ATTRS = ['aria-label', 'placeholder'];
   var EN_TITLE = document.title, metaDesc = $('meta[name="description"]'), EN_DESC = metaDesc ? metaDesc.content : '';
   function t(s) { return lang === 'es' && ES[s] ? ES[s] : s; }
 
@@ -48,9 +45,8 @@
     translate();
     document.title = t(EN_TITLE);
     if (metaDesc) metaDesc.content = t(EN_DESC);
-    $('.lang').setAttribute('aria-label', lang === 'es' ? 'View in English' : 'Ver en español');
+    $('.lang').setAttribute('aria-label', lang === 'es' ? 'EN ES, view in English' : 'EN ES, ver en español');
     $('.menu-label').textContent = t(document.body.classList.contains('menu-open') ? 'Close' : 'Menu');
-    aboutStatement();
   }
 
   function setLang(next) {
@@ -58,10 +54,7 @@
     lang = next;
     root.setAttribute('data-lang', lang);
     try { localStorage.setItem('gd-lang', lang); } catch (e) {}
-    function swap() {
-      applyLang();
-      if (hasGsap) ScrollTrigger.refresh();
-    }
+    function swap() { applyLang(); }
     if (reduceMotion) { swap(); return; }
     // Fade the copy out, swap it while invisible, fade it back in
     document.body.classList.add('is-switching');
@@ -464,7 +457,7 @@
       return '<div class="work-row work-row--' + row.layout + '">' + row.items.map(function (w) {
         var d = DEMOS[w.demo];
         return '<article class="work">' +
-          '<div class="work-preview" tabindex="0" data-cursor="Scroll" aria-label="Preview of the ' + d.name + ' concept. Focus to scroll through it.">' + miniSite(w.demo) + '</div>' +
+          '<div class="work-preview" tabindex="0" aria-label="Preview of the ' + d.name + ' concept. Focus to scroll through it.">' + miniSite(w.demo) + '</div>' +
           '<div class="work-meta"><div><h3>' + d.name + '</h3><p class="work-desc">' + w.desc + '</p></div>' +
           '<dl><dt>Industry</dt><dd>' + w.industry + '</dd><dt>Service</dt><dd>' + w.service + '</dd></dl></div>' +
           '</article>';
@@ -479,7 +472,7 @@
   (function form() {
     var f = $('#form'), status = $('#form-status');
     if (!f) return;
-    var EMAIL = 'hello@gdcompany.com';
+    var EMAIL = 'agd.studiogc@gmail.com';
     function err(input, msg) {
       var e = $('.field-error', input.closest('.field'));
       if (e) e.textContent = msg || '';
@@ -514,30 +507,18 @@
   })();
 
   /* ------------------------------------------------------------------
-     Smooth scrolling
+     In-page links: native scrolling, softened only when motion is welcome
      ------------------------------------------------------------------ */
-  var lenis = null;
-  if (window.Lenis && !reduceMotion) {
-    lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
-    if (hasGsap) {
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
-    }
-  }
   function scrollToTarget(hash) {
     var target = hash === '#top' ? 0 : $(hash);
     if (target === null) return false;
-    if (lenis) lenis.scrollTo(target, { offset: target === 0 ? 0 : -88, duration: 1, easing: function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; } });
-    else if (target === 0) window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (target === 0) window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     return true;
   }
 
   /* ------------------------------------------------------------------
-     Navigation: menu, hide on scroll, colour over dark sections
+     Navigation: menu, dropdowns, colour over dark sections
      ------------------------------------------------------------------ */
   var nav = $('#nav'), menuBtn = $('.menu-btn'), menu = $('#menu');
   function setMenu(open) {
@@ -545,7 +526,7 @@
     menuBtn.setAttribute('aria-expanded', String(open));
     $('.menu-label', menuBtn).textContent = t(open ? 'Close' : 'Menu');
     menu.setAttribute('aria-hidden', String(!open));
-    if (lenis) open ? lenis.stop() : lenis.start();
+    document.documentElement.style.overflow = open ? 'hidden' : '';
   }
   menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
 
@@ -602,48 +583,18 @@
   });
   if ($('#main')) $('#main').setAttribute('tabindex', '-1');
 
-  var darkEls = $$('[data-dark]'), lastY = window.scrollY;
+  // The header stays put; it only changes colour over dark sections, checked once per frame at most
+  var darkEls = $$('[data-dark]'), ticking = false;
   function onScroll() {
-    var y = window.scrollY;
+    ticking = false;
     var probe = 42, dark = false;
     darkEls.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top <= probe && r.bottom >= probe) dark = true; });
     nav.classList.toggle('on-dark', dark);
-    nav.classList.toggle('is-scrolled', y > 24);
-    if (!document.body.classList.contains('menu-open') && !nav.contains(document.activeElement)) {
-      if (y > lastY + 6 && y > window.innerHeight * .8) nav.classList.add('is-hidden');
-      else if (y < lastY - 6 || y < 80) nav.classList.remove('is-hidden');
-    }
-    lastY = y;
+    nav.classList.toggle('is-scrolled', window.scrollY > 24);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  nav.addEventListener('focusin', function () { nav.classList.remove('is-hidden'); });
-
-  /* ------------------------------------------------------------------
-     Cursor
-     ------------------------------------------------------------------ */
-  if (finePointer && !reduceMotion) {
-    var cur = $('.cursor'), label = $('.cursor-label');
-    document.body.classList.add('has-cursor');
-    var mx = -100, my = -100, cx = -100, cy = -100;
-    window.addEventListener('pointermove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      var t = e.target;
-      var lab = t.closest && t.closest('[data-cursor]');
-      var text = t.closest && t.closest('input:not([type="radio"]):not([type="range"]), textarea');
-      var link = t.closest && t.closest('a, button, label, [role="button"], input[type="range"]');
-      cur.classList.toggle('has-label', !!lab);
-      if (lab) label.textContent = lab.dataset.cursor;
-      cur.classList.toggle('is-text', !!text);
-      cur.classList.toggle('is-link', !!link && !lab);
-      cur.classList.remove('is-hidden');
-    }, { passive: true });
-    document.addEventListener('mouseleave', function () { cur.classList.add('is-hidden'); });
-    (function loop() {
-      cx += (mx - cx) * .35; cy += (my - cy) * .35;
-      cur.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
-      requestAnimationFrame(loop);
-    })();
-  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
 
   /* ------------------------------------------------------------------
      Hero film: shown in place from the first paint (poster), plays only while visible.
@@ -669,122 +620,7 @@
     }).observe(video);
   }
 
-  /* ------------------------------------------------------------------
-     Motion: the opening, the film reveal, the studio statement
-     ------------------------------------------------------------------ */
-  function intro() {
-    if (!hasGsap || reduceMotion) return;
-    gsap.from('.nav-bar > *', { y: -16, opacity: 0, duration: 1, stagger: .06, delay: .2, ease: 'expo.out' });
-    if (!$('.hero-title')) return;
-    gsap.from('.hero-title .line > span', { yPercent: 115, duration: 1.2, stagger: .09, ease: 'expo.out' });
-    gsap.from('.hero-foot > *', { y: 24, opacity: 0, duration: 1.1, stagger: .08, delay: .35, ease: 'expo.out' });
-  }
-
-  // Re-runnable so the word-by-word reveal is rebuilt when the language changes
-  var aboutTween = null, ABOUT_EN = null;
-  function aboutStatement() {
-    var el = $('#about-statement');
-    if (!el) return;
-    if (ABOUT_EN === null) ABOUT_EN = (el.firstChild && el.firstChild.__en) || el.textContent; // translate() may already have swapped it
-    var text = t(ABOUT_EN);
-    if (aboutTween) { aboutTween.scrollTrigger.kill(); aboutTween.kill(); aboutTween = null; }
-    if (!hasGsap || reduceMotion) { el.textContent = text; return; }
-    el.innerHTML = text.split(' ').map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
-    el.setAttribute('aria-label', text);
-    aboutTween = gsap.fromTo($$('.w', el), { opacity: .14 }, {
-      opacity: 1, stagger: .1, ease: 'none',
-      scrollTrigger: { trigger: el, start: 'top 82%', end: 'bottom 48%', scrub: true }
-    });
-  }
-
-  /* ------------------------------------------------------------------
-     Motion: content eases in as it scrolls into view
-     ------------------------------------------------------------------ */
-  function reveals() {
-    if (!hasGsap || reduceMotion) return;
-    var ease = 'expo.out';
-
-    // Section headings, then their intro paragraph
-    $$('.section .head').forEach(function (head) {
-      gsap.from(head.children, {
-        y: 40, opacity: 0, duration: 1.1, stagger: .1, ease: ease, clearProps: 'transform,opacity',
-        scrollTrigger: { trigger: head, start: 'top 86%', once: true }
-      });
-    });
-
-    // Lists of cards and rows arrive in a soft cascade
-    var items = $$([
-      '.offer-index', '.offer-head', '.offer-body', '.price-card', '.sheet', '.path', '.paths-goal',
-      '.plan', '.plans-note', '.plans-extra', '.philosophy > *', '.contact-lead', '.pick', '.bench-tools', '.web-facts > div',
-      '.way', '.vis-cta', '.audiences > div', '.outcome', '.re-who > div',
-      '.re-services h3', '.re-services li', '.about-mark', '.pillars > div', '.process > h2', '.step',
-      '.form .field', '.form fieldset', '.form-end', '.form-legal', '.direct > div', '.work-meta', '.footer',
-      '.intro-body > *', '.card', '.section-cta', '.cta-actions'
-    ].join(','));
-    gsap.set(items, { y: 28, opacity: 0 });
-    ScrollTrigger.batch(items, {
-      start: 'top 92%', once: true,
-      onEnter: function (batch) {
-        gsap.to(batch, { y: 0, opacity: 1, duration: 1, stagger: .06, ease: ease, overwrite: true, clearProps: 'transform,opacity' });
-      }
-    });
-
-    // Large interactive pieces rise and settle
-    $$('.stage, .compare, .listing, .orbit, .work-preview').forEach(function (el) {
-      gsap.from(el, {
-        y: 48, opacity: 0, scale: .98, duration: 1.2, ease: ease, clearProps: 'transform,opacity',
-        scrollTrigger: { trigger: el, start: 'top 90%', once: true }
-      });
-    });
-
-    // The closing headline slides in line by line
-    if ($('.contact-title')) gsap.from('.contact-title span', {
-      yPercent: 60, opacity: 0, duration: 1.2, stagger: .14, ease: ease, clearProps: 'transform,opacity',
-      scrollTrigger: { trigger: '.contact-title', start: 'top 85%', once: true }
-    });
-  }
-
-  // Buttons lean gently towards the pointer
-  function magnetic() {
-    if (!hasGsap || reduceMotion || !finePointer) return;
-    $$('.btn, .lang').forEach(function (b) {
-      b.addEventListener('pointermove', function (e) {
-        var r = b.getBoundingClientRect();
-        gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * .22, y: (e.clientY - r.top - r.height / 2) * .3, duration: .6, ease: 'power3.out' });
-      });
-      b.addEventListener('pointerleave', function () {
-        gsap.to(b, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, .45)' });
-      });
-    });
-  }
-
   applyLang();
-  reveals();
-  magnetic();
   onScroll();
   root.classList.remove('i18n-pending');
-
-  // Loader (home, first visit of the session): wait for fonts (max 1.6s), lift the curtain, then play the opening
-  var loader = $('.loader');
-  var showLoader = !!loader && !root.classList.contains('no-loader');
-  if (!showLoader) { intro(); }
-  else {
-    var started = Date.now(), done = false;
-    var finish = function () {
-      if (done) return; done = true;
-      var wait = Math.max(0, 1000 - (Date.now() - started));
-      setTimeout(function () {
-        loader.classList.add('is-done');
-        setTimeout(intro, 280);
-        setTimeout(function () { loader.style.display = 'none'; }, 1100);
-      }, wait);
-    };
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(finish);
-    setTimeout(finish, 1600);
-  }
-
-  if (hasGsap) {
-    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-  }
 })();

@@ -79,9 +79,6 @@
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 
 body {
   margin: 0;
@@ -228,58 +225,6 @@ ul, ol { list-style: none; }
 }
 
 /* ==========================================================================
-   Loader
-   ========================================================================== */
-.loader {
-  position: fixed; inset: 0; z-index: 120;
-  display: grid; place-items: center;
-  background: var(--ink);
-  color: #EDF2F3;
-}
-.loader-inner { display: grid; justify-items: center; gap: 22px; }
-.loader .mark { width: 88px; clip-path: inset(100% 0 0 0); animation: markIn 1.1s var(--ease-io) .15s forwards; }
-.loader-word {
-  font-stretch: 125%; font-weight: 400; letter-spacing: -.02em; font-size: 1rem;
-  opacity: 0; animation: fadeIn .6s ease .8s forwards;
-}
-.loader.is-done { transform: translateY(-100%); transition: transform 1s var(--ease-io); }
-@keyframes markIn { to { clip-path: inset(0 0 0 0); } }
-@keyframes fadeIn { to { opacity: 1; } }
-.no-loader .loader { display: none; }
-
-/* ==========================================================================
-   Cursor — the orange pointer from the GD emblem
-   ========================================================================== */
-.cursor { display: none; }
-@media (hover: hover) and (pointer: fine) {
-  .has-cursor, .has-cursor a, .has-cursor button, .has-cursor label { cursor: none; }
-  .has-cursor input, .has-cursor textarea { cursor: text; }
-  .has-cursor input[type="range"] { cursor: none; }
-  .cursor {
-    display: block;
-    position: fixed; left: 0; top: 0; z-index: 150;
-    pointer-events: none;
-    will-change: transform;
-  }
-  .cursor-arrow {
-    width: 22px; height: 26px;
-    transform-origin: 2px 2px;
-    transition: transform .35s var(--ease), opacity .2s;
-  }
-  .cursor.is-link .cursor-arrow { transform: rotate(-14deg) scale(1.15); }
-  .cursor.is-text .cursor-arrow, .cursor.is-hidden .cursor-arrow { opacity: 0; }
-  .cursor-label {
-    position: absolute; left: 18px; top: 22px;
-    padding: 7px 13px; border-radius: 999px;
-    background: var(--sun); color: var(--ink);
-    font-size: .78rem; font-weight: 550; white-space: nowrap;
-    transform: scale(.4); opacity: 0; transform-origin: 0 0;
-    transition: transform .4s var(--ease), opacity .25s;
-  }
-  .cursor.has-label .cursor-label { transform: scale(1); opacity: 1; }
-}
-
-/* ==========================================================================
    Header
    ========================================================================== */
 .nav {
@@ -290,7 +235,6 @@ ul, ol { list-style: none; }
 :root[data-theme="dark"] .nav { color: #E9EEF0; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nav { color: #E9EEF0; } }
 .nav.on-dark { color: #EDF2F3; }
-.nav.is-hidden { transform: translateY(-110%); }
 .nav-bar {
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   height: 84px;
