@@ -16,7 +16,7 @@
 (function () {
   'use strict';
 
-  var POLICY_VERSION = '2026-10-22';
+  var POLICY_VERSION = '2026-10-23';
   var KEY = 'agd-consent';
   var CATEGORIES = ['analytics', 'marketing'];
   var SERVICES = []; // e.g. { category: 'analytics', name: 'Example Analytics', provider: 'Example Ltd. (EU)' }
