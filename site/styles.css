@@ -1054,7 +1054,7 @@ legend { font-size: var(--t-small); color: var(--muted); margin-bottom: 14px; pa
 
 /* Copy fades out and back in while the language changes */
 /* (targets are elements GSAP never animates, so the two don't fight over opacity) */
-main, .nav-links a, .nav-cta > span, .menu ul, .menu-label { transition: opacity .32s var(--ease-io); }
+main, .nav-links a, .nav-cta > span, .menu ul, .menu-label { transition: opacity .16s var(--ease-io); }
 .is-switching main, .is-switching .nav-links a, .is-switching .nav-cta > span, .is-switching .menu ul, .is-switching .menu-label { opacity: 0; }
 
 /* Avoid a flash of English before Spanish is applied */

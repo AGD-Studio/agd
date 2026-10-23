@@ -61,7 +61,7 @@
     setTimeout(function () {
       swap();
       requestAnimationFrame(function () { document.body.classList.remove('is-switching'); });
-    }, 320);
+    }, 160);
   }
   $('.lang').addEventListener('click', function () { setLang(lang === 'es' ? 'en' : 'es'); });
 
